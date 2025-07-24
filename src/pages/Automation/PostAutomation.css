@@ -1,0 +1,26 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 16px;
+  }
+  
+  .grid-item {
+    cursor: pointer;
+    position: relative;
+    border: 2px solid transparent;
+    transition: border 0.2s ease;
+  }
+  
+  .grid-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  
+  .grid-item.selected {
+    border: 2px solid #4f46e5; /* Tailwind's indigo-600 */
+    box-shadow: 0 0 0 2px #c7d2fe; /* subtle outline */
+  }
+  

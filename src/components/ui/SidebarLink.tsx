@@ -1,0 +1,38 @@
+import { NavLink } from "react-router-dom";
+import { FC, ReactNode } from "react";
+
+interface SidebarLinkProps {
+  to: string;
+  icon: ReactNode;
+  label: string;
+  reloadDocument?: boolean;
+  end?: boolean;
+}
+
+const SidebarLink: FC<SidebarLinkProps> = ({
+  to,
+  icon: Icon,
+  label,
+  reloadDocument = false,
+  end = true,
+}) => (
+  <NavLink
+    reloadDocument={reloadDocument}
+    to={to}
+    end={end}
+    className={({ isActive }) =>
+      `flex items-center px-4 py-2 rounded-lg transition ${
+        isActive
+          ? "bg-blue-100 text-blue-600"
+          : "text-gray-700 hover:bg-gray-100 transition"
+      }`
+    }
+  >
+    <div className="flex items-center gap-2 px-1 py-1 rounded-md ">
+      {Icon}
+      <span className="text-sm font-medium">{label}</span>
+    </div>
+  </NavLink>
+);
+
+export default SidebarLink;
