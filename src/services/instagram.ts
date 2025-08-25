@@ -2,16 +2,19 @@ import API_BASE_URL from "@/constants";
 import { LOCAL_STORAGE_KEY, storage } from "@/lib/utils";
 
 export const instagramService = {
-  fetchAllPosts: async () => {
+  fetchAllPosts: async ({ brandId }: { brandId: number }) => {
     const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-
-    const res = await fetch(`${API_BASE_URL}/instagram/post`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
+    const accountId = brandId;
+    const res = await fetch(
+      `${API_BASE_URL}/instagram/post?accountId=${accountId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
     let data;
     try {
@@ -81,5 +84,51 @@ export const instagramService = {
     }
 
     return data;
+  },
+
+  async syncProfile(brandId: number) {
+    const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+    const accountId = brandId;
+    const response = await fetch(
+      `${API_BASE_URL}/instagram/syncProfile?accountId=${accountId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(
+        result?.message || `Failed to sync profile (HTTP ${response.status})`
+      );
+    }
+
+    return result.data;
+  },
+
+  async syncPosts(brandId: number) {
+    const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+    const accountId = brandId;
+    const response = await fetch(
+      `${API_BASE_URL}/instagram/syncPosts?accountId=${accountId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(
+        result?.message || `Failed to sync posts (HTTP ${response.status})`
+      );
+    }
+
+    return result.data;
   },
 };

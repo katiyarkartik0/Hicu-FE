@@ -3,14 +3,13 @@ import { useNumericParam } from "@/hooks/react-router";
 import { automationService } from "@/services/automation";
 import { useMutation } from "@tanstack/react-query";
 import { useState, useRef } from "react";
-import DmAutomationId_1 from "/Users/newtonschool/Desktop/st/nest_app/frontend/public/dmAutomation-1.jpeg";
 
 type AutomationItem = { id: number; url: string; available: boolean };
 
 const availableDmAutomation: AutomationItem[] = [
   {
     id: 1,
-    url: DmAutomationId_1,
+    url: "/dmAutomation-1.jpeg",
     available: true,
   },
   {

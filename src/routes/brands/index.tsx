@@ -3,6 +3,7 @@ import AuthGuard from "@/auth/AuthGuard";
 import { RouteObject } from "react-router-dom";
 import automationRoutes from "./automation";
 import Customers from "@/pages/Customers";
+import Analytics from "@/pages/Analytics";
 
 const BrandPage = lazy(() => import("@/pages/Brands/BrandPage"));
 const BrandRedirect = lazy(() => import("@/pages/Brands/BrandRedirect"));
@@ -40,7 +41,7 @@ const brandRoutes: RouteObject = {
         },
         {
           path: "analytics",
-          element: <>Analytics</>,
+          element: <Analytics/>,
         },
         {
           path: "customers",

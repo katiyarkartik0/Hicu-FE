@@ -50,7 +50,7 @@ const brandService = {
       throw new Error(data?.message || "Failed to fetch accounts");
     return data;
   },
-  getBrandById: async (id: number) => {
+  getBrandById: async (id: number): Promise<any> => {
     const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
     const res = await fetch(`${API_BASE_URL}/accounts/${id}`, {
       method: "GET",

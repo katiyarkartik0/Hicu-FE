@@ -132,5 +132,5 @@ export const brandMemberService = {
     if (!res.ok || !data)
       throw new Error(data?.message || "Failed to remove member from account");
     return data;
-  },
+  }
 };

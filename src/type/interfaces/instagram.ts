@@ -6,16 +6,15 @@ export type MediaItem = {
   timestamp: string;
 };
 
-export type UserProfile = {
-  id: string;
-  name: string;
-  username: string;
-  profilePictureUrl: string;
-  followersCount: number;
-  followsCount: number;
-  mediaCount: number;
-  accountType: string;
-  media: {
-    data: MediaItem[];
-  };
+
+export type IgUserProfile = {
+  igUserId: string;
+  igName: string;
+  igUsername: string;
+  igBiography: string;
+  igProfilePictureUrl: string;
+  igFollowersCount: number;
+  igFollowingCount: number;
+  igMediaCount: number;
+  igAccountType: string;
 };

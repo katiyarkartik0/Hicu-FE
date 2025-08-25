@@ -4,14 +4,13 @@ import { automationService } from "@/services/automation";
 import { useMutation } from "@tanstack/react-query";
 import { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import commentAutomationId_1 from "/Users/newtonschool/Desktop/st/nest_app/frontend/public/comment-graph-1.jpeg";
 
 type AutomationItem = { id: number; url: string; available: boolean };
 
 const availableCommentAutomation: AutomationItem[] = [
   {
     id: 1,
-    url: commentAutomationId_1,
+    url: "/comment-graph-1.jpeg",
     available: true,
   },
   {
