@@ -1,10 +1,10 @@
 import Button from "@/components/ui/Button";
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const TABS: { key: string; label: string }[] = [
   {
-    key: "prospect",
-    label: "Prospect",
+    key: "prospects",
+    label: "Prospects",
   },
   {
     key: "post",
@@ -30,15 +30,18 @@ function Analytics() {
             <div className="w-full bg-gray-100 rounded-lg p-2 flex justify-center items-center">
               <div className="w-full h-full flex justify-between items-center gap-2">
                 {TABS.map((tab) => (
-                  <Button
+                  <NavLink
+                    to={tab.key}
+                    end={false}
                     key={tab.key}
-                    onClick={() => navigate(tab.key)}
-                    className={`${
-                      activeTabKey === tab.key ? "bg-white" : ""
-                    } rounded-md font-medium w-full border-none`}
+                    className={({ isActive }) =>
+                      `${
+                        isActive ? "bg-white" : ""
+                      } rounded-md font-medium w-full border-none`
+                    }
                   >
                     {tab.label}
-                  </Button>
+                  </NavLink>
                 ))}
               </div>
             </div>

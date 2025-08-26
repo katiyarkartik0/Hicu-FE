@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { prospectsService } from "@/services/prospects";
 import { useNumericParam } from "@/hooks/react-router";
-import { Card } from "@/pages/Analytics/Prospect/Card";
+import { Card } from "@/pages/Analytics/Prospects/Card";
 type JSONValue =
   | string
   | number
