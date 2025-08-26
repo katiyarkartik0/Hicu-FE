@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Card } from "./Card";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { prospectsService } from "@/services/prospects";
 import { useNumericParam } from "@/hooks/react-router";
+import { Card } from "@/pages/Analytics/Prospect/Card";
 type JSONValue =
   | string
   | number

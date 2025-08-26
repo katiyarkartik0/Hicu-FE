@@ -1,11 +1,12 @@
 import { useState } from "react";
 import Button from "@/components/ui/Button";
+import { Prospects } from "./Prospect";
 
 const TABS = [
   {
-    key: "customer",
-    label: "Customer",
-    component: () => <>Customer</>,
+    key: "prospect",
+    label: "Prospect",
+    component: Prospects,
   },
   {
     key: "post",
@@ -20,10 +21,10 @@ const TABS = [
   // Add more tiles here easily in future
 ];
 function Analytics() {
-  const [activeTab, setActiveTab] = useState("integrations");
+  const [activeTab, setActiveTab] = useState("prospect");
 
   const ActiveComponent =
-    TABS.find((tab) => tab.key === activeTab)?.component || (() => <>Customer</>);
+    TABS.find((tab) => tab.key === activeTab)?.component || Prospects;
 
   return (
     <div className="w-full flex">

@@ -124,11 +124,6 @@ function Sidebar() {
               label="Dashboard"
             />
             <SidebarLink
-              to="customers"
-              icon={<Users strokeWidth={1.5} size={18} />}
-              label="Customers"
-            />
-            <SidebarLink
               to="analytics"
               icon={<ChartSpline strokeWidth={1.5} size={18} />}
               label="Analytics"
