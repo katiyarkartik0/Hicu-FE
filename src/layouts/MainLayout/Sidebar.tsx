@@ -125,6 +125,7 @@ function Sidebar() {
             />
             <SidebarLink
               to="analytics"
+              end={false}
               icon={<ChartSpline strokeWidth={1.5} size={18} />}
               label="Analytics"
             />
@@ -135,6 +136,7 @@ function Sidebar() {
               label="Automation"
             />
             <SidebarLink
+              end={false}
               to="/brand/register"
               icon={<Plus strokeWidth={1.5} size={18} />}
               label="Add new"
@@ -144,16 +146,19 @@ function Sidebar() {
           <h2 className="text-sm px-2 font-semibold mt-6">Account</h2>
           <div className="my-2 flex flex-col gap-2">
             <SidebarLink
+              end={false}
               to="notification"
               icon={<Bell strokeWidth={1.5} size={18} />}
               label="Notifications"
             />
             <SidebarLink
+              end={false}
               to="billing"
               icon={<CreditCard strokeWidth={1.5} size={18} />}
               label="Billing"
             />
             <SidebarLink
+              end={false}
               to="profile"
               icon={<Settings strokeWidth={1.5} size={18} />}
               label="Profile"

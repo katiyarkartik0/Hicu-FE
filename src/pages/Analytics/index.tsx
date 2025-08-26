@@ -32,7 +32,7 @@ function Analytics() {
                 {TABS.map((tab) => (
                   <Button
                     key={tab.key}
-                    onClick={() => navigate(tab.key, { replace: true })}
+                    onClick={() => navigate(tab.key)}
                     className={`${
                       activeTabKey === tab.key ? "bg-white" : ""
                     } rounded-md font-medium w-full border-none`}
