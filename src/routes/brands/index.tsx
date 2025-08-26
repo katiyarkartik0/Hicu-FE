@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import AuthGuard from "@/auth/AuthGuard";
-import { RouteObject } from "react-router-dom";
+import { Navigate, RouteObject } from "react-router-dom";
 import automationRoutes from "./automation";
 import Analytics from "@/pages/Analytics";
 
@@ -9,6 +9,8 @@ const BrandRedirect = lazy(() => import("@/pages/Brands/BrandRedirect"));
 const RegisterBrand = lazy(() => import("@/pages/Brands/Register"));
 const MainLayout = lazy(() => import("@/layouts/MainLayout"));
 const Dashboard = lazy(() => import("../../pages/Dashboard"));
+
+const DEFAULT_ANALYTICS_PAGE = "prospect";
 
 const brandRoutes: RouteObject = {
   path: "brand",
@@ -40,7 +42,16 @@ const brandRoutes: RouteObject = {
         },
         {
           path: "analytics",
-          element: <Analytics/>,
+          children: [
+            {
+              index: true,
+              element: <Navigate to={DEFAULT_ANALYTICS_PAGE} replace />,
+            },
+            {
+              path: ":type",
+              element: <Analytics />,
+            },
+          ],
         },
         automationRoutes,
       ],

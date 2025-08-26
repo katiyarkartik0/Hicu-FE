@@ -1,8 +1,8 @@
-import { useState } from "react";
 import Button from "@/components/ui/Button";
 import { Prospects } from "./Prospect";
+import { useNavigate, useParams } from "react-router-dom";
 
-const TABS = [
+const TABS: { key: string; label: string; component: React.FC }[] = [
   {
     key: "prospect",
     label: "Prospect",
@@ -21,10 +21,10 @@ const TABS = [
   // Add more tiles here easily in future
 ];
 function Analytics() {
-  const [activeTab, setActiveTab] = useState("prospect");
-
+  const { type: analyticsDefaultKey } = useParams();
+  const navigate = useNavigate();
   const ActiveComponent =
-    TABS.find((tab) => tab.key === activeTab)?.component || Prospects;
+    TABS.find((tab) => tab.key === analyticsDefaultKey)?.component || Prospects;
 
   return (
     <div className="w-full flex">
@@ -36,9 +36,9 @@ function Analytics() {
                 {TABS.map((tab) => (
                   <Button
                     key={tab.key}
-                    onClick={() => setActiveTab(tab.key)}
+                    onClick={() => navigate(`../${tab.key}`, { replace: true })}
                     className={`${
-                      activeTab === tab.key ? "bg-white" : ""
+                      analyticsDefaultKey === tab.key ? "bg-white" : ""
                     } rounded-md font-medium w-full border-none`}
                   >
                     {tab.label}
