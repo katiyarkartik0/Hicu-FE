@@ -1,31 +1,27 @@
 import Button from "@/components/ui/Button";
-import { Prospects } from "./Prospect";
-import { useNavigate, useParams } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
-const TABS: { key: string; label: string; component: React.FC }[] = [
+const TABS: { key: string; label: string }[] = [
   {
     key: "prospect",
     label: "Prospect",
-    component: Prospects,
   },
   {
     key: "post",
     label: "Post",
-    component: () => <>Post</>,
   },
   {
     key: "automation",
     label: "Automation",
-    component: () => <>Automation</>,
   },
   // Add more tiles here easily in future
 ];
 function Analytics() {
-  const { type: analyticsDefaultKey } = useParams();
   const navigate = useNavigate();
-  const ActiveComponent =
-    TABS.find((tab) => tab.key === analyticsDefaultKey)?.component || Prospects;
+  const { pathname } = useLocation();
 
+  // get the last part of the URL
+  const activeTabKey = pathname.split("/").pop() || "prospect";
   return (
     <div className="w-full flex">
       <div className="w-full">
@@ -36,9 +32,9 @@ function Analytics() {
                 {TABS.map((tab) => (
                   <Button
                     key={tab.key}
-                    onClick={() => navigate(`../${tab.key}`, { replace: true })}
+                    onClick={() => navigate(tab.key, { replace: true })}
                     className={`${
-                      analyticsDefaultKey === tab.key ? "bg-white" : ""
+                      activeTabKey === tab.key ? "bg-white" : ""
                     } rounded-md font-medium w-full border-none`}
                   >
                     {tab.label}
@@ -46,10 +42,7 @@ function Analytics() {
                 ))}
               </div>
             </div>
-
-            <div className="w-full h-[80%] mt-[2%] border-b-2 flex flex-col justify-between overflow-scroll items-center">
-              <ActiveComponent />
-            </div>
+            <Outlet />
           </div>
         </div>
       </div>

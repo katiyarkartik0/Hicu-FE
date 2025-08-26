@@ -3,6 +3,7 @@ import AuthGuard from "@/auth/AuthGuard";
 import { Navigate, RouteObject } from "react-router-dom";
 import automationRoutes from "./automation";
 import Analytics from "@/pages/Analytics";
+import { Prospects } from "@/pages/Analytics/Prospect";
 
 const BrandPage = lazy(() => import("@/pages/Brands/BrandPage"));
 const BrandRedirect = lazy(() => import("@/pages/Brands/BrandRedirect"));
@@ -42,14 +43,20 @@ const brandRoutes: RouteObject = {
         },
         {
           path: "analytics",
+          element: <Analytics />,
           children: [
+            { index: true, element: <Navigate to={DEFAULT_ANALYTICS_PAGE} /> },
             {
-              index: true,
-              element: <Navigate to={DEFAULT_ANALYTICS_PAGE} replace />,
+              path: "prospect",
+              element: <Prospects />,
             },
             {
-              path: ":type",
-              element: <Analytics />,
+              path: "post",
+              element: <>Post</>,
+            },
+            {
+              path: "automation",
+              element: <>Auto</>,
             },
           ],
         },
