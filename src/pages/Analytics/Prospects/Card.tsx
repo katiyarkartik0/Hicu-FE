@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ChevronDown, ChevronRight, Info } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 type JSONValue = string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue };
 
@@ -36,9 +37,8 @@ const JSONRenderer: React.FC<JSONRendererProps> = ({ data, level = 0 }) => {
       </div>
     );
   }
-
   return (
-    <div className="pl-4 border-l border-gray-600">
+    <div className="pl-4 border-l border-gray-600" >
       {Object.entries(data).map(([key, value]) => {
         const isObject = typeof value === "object" && value !== null;
         const isCollapsed = collapsed[key];
@@ -75,8 +75,13 @@ const JSONRenderer: React.FC<JSONRendererProps> = ({ data, level = 0 }) => {
 };
 
 export const Card: React.FC<{ prospect: Prospect }> = ({ prospect }) => {
+  const navigate = useNavigate();
+
+  const handleNavigate = ()=>{
+    navigate(`${prospect.userId}`)
+  }
   return (
-    <div className="p-6 bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white rounded-2xl shadow-2xl border border-gray-700">
+    <div onClick={handleNavigate} className="p-6 bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white rounded-2xl shadow-2xl border border-gray-700">
       <h2 className="text-xl font-bold mb-2 text-cyan-300">
         {prospect.username}
       </h2>

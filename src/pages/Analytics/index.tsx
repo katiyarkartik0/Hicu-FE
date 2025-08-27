@@ -1,4 +1,3 @@
-import Button from "@/components/ui/Button";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 
 const TABS: { key: string; label: string }[] = [

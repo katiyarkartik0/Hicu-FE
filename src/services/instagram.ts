@@ -131,4 +131,27 @@ export const instagramService = {
 
     return result.data;
   },
+
+  async getThreads({ brandId, userId }: { brandId: number; userId: string }) {
+    const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+    const accountId = brandId;
+    const response = await fetch(
+      `${API_BASE_URL}/instagram/getThreads/${userId}?accountId=${accountId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(
+        result?.message || `Failed to sync posts (HTTP ${response.status})`
+      );
+    }
+
+    return result;
+  },
 };

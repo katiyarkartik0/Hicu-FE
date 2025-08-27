@@ -4,6 +4,7 @@ import { Navigate, RouteObject } from "react-router-dom";
 import automationRoutes from "./automation";
 import Analytics from "@/pages/Analytics";
 import { Prospects } from "@/pages/Analytics/Prospects";
+import Prospect from "@/pages/Analytics/Prospects/Prospect";
 
 const BrandPage = lazy(() => import("@/pages/Brands/BrandPage"));
 const BrandRedirect = lazy(() => import("@/pages/Brands/BrandRedirect"));
@@ -60,7 +61,7 @@ const brandRoutes: RouteObject = {
             },
             {
               path: "prospects/:id",
-              element: <>ddd</>,
+              element: <Prospect/>,
             },
           ],
         },
