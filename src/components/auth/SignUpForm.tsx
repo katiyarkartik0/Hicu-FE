@@ -123,16 +123,22 @@ function SignUpForm() {
       {step === 1 ? (
         <div className="w-full h-full flex flex-col justify-between">
           <div className="flex flex-col">
-            <label htmlFor="email">Work Email</label>
+            <label
+              htmlFor="email"
+              className="text-[12px] font-bold text-grey-2c pt-2"
+            >
+              Work Email
+            </label>
             <Input
               id="email"
               name="email"
               placeholder="name@company.com"
+              className="w-full border-1 border-grey-ef px-2 py-2 focus:border-grey-91 focus:outline-none"
               value={formData.email}
               onChange={handleChange}
             />
             {errors.email && (
-              <div className="text-red-600 text-sm">
+              <div className="text-[12px] font-semibold text-red-600 leading-none">
                 {errors.email || "Login failed"}
               </div>
             )}
@@ -140,11 +146,12 @@ function SignUpForm() {
           {checkCompanyEmail.isPending ? (
             "Loading..."
           ) : (
-            <Button className="w-full text-white bg-blue-500 flex justify-center items-center">
+            <Button className="flex items-center justify-center w-full text-white text-[12px] font-bold bg-grey-2c disabled:opacity-50 mt-3 hover:bg-grey-18 active:bg-grey-18">
               Continue{" "}
               <MoveRight
                 strokeWidth={DEFAULT_STROKE_WIDTH}
                 width={DEFAULT_ICON_SIZE}
+                className="ml-1"
               />
             </Button>
           )}
@@ -152,28 +159,39 @@ function SignUpForm() {
       ) : (
         <div className="h-full w-full flex flex-col justify-between">
           <div className="flex flex-col">
-            <label htmlFor="name">Name</label>
+            <label
+              htmlFor="name"
+              className="text-[12px] font-bold text-grey-2c pt-2"
+            >
+              Name
+            </label>
             <Input
               id="name"
               name="name"
               placeholder="John Dow"
+              className="w-full border-1 border-grey-ef px-2 py-2 focus:border-grey-91 focus:outline-none"
               value={formData.name}
               onChange={handleChange}
             />
             {errors.name && (
-              <div className="text-red-600 text-sm">
+              <div className="text-[12px] font-semibold text-red-600 leading-none">
                 {errors.name || "Login failed"}
               </div>
             )}
           </div>
           <div className="flex flex-col">
-            <label htmlFor="password">Password</label>
+            <label
+              htmlFor="password"
+              className="text-[12px] font-bold text-grey-2c pt-2"
+            >
+              Password
+            </label>
             <div className="relative">
               <Input
                 id="password"
                 name="password"
                 type={isPasswordVisible ? "text" : "password"}
-                className="w-full"
+                className="w-full border-1 border-grey-ef px-2 py-2 focus:border-grey-91 focus:outline-none"
                 placeholder="•••••••"
                 value={formData.password}
                 onChange={handleChange}
@@ -197,21 +215,21 @@ function SignUpForm() {
               </Button>
             </div>
             {errors.password && (
-              <div className="text-red-600 text-sm">
+              <div className="text-[12px] font-semibold text-red-600 leading-none">
                 {errors.password || "Login failed"}
               </div>
             )}
           </div>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col justify-between items-center">
             <Button
-              className="w-1/3 border-2"
+              className="w-[100%] border-2 border-grey-2c text-[12px] font-bold text-grey-2c hover:bg-grey-2c hover:text-white active:bg-grey-2c active:text-white my-1"
               type="button"
               onClick={() => setStep(1)}
             >
               Back
             </Button>
             <Button
-              className="w-2/3 text-white bg-blue-500 rounded-md"
+              className="w-full text-white text-[12px] font-bold bg-grey-2c disabled:opacity-50 mt-1 hover:bg-grey-18 active:bg-grey-18"
               type="submit"
             >
               Create Account

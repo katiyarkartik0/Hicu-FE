@@ -8,7 +8,7 @@ const Button = React.forwardRef<
   return (
     <button
       ref={ref}
-      className={cn("px-8 py-2 rounded-md border", className)}
+      className={cn("px-2 py-1 md:px-8 md:py-2 rounded-md border", className)}
       {...props}
     />
   );

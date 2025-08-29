@@ -9,16 +9,16 @@ function Form() {
     setIsNew((prev) => !prev);
   };
   return (
-    <div className="w-[70%] rounded-md h-full border border-md flex justify-center items-center">
-      <div className="w-[85%] flex flex-col justify-between items-center">
+    <div className="w-[100%] rounded-md h-full border border-md flex justify-center items-center p-4">
+      <div className="w-[100%] flex flex-col justify-between items-center">
         <div className="w-full h-[10%] flex flex-col justify-between items-center">
-          <h3 className="text-3xl font-bold">Welcome to HiCu</h3>
-          <p className="text-gray-500">
+          <h3 className="text-[32px] font-bold text-grey-18">Welcome to HiCu</h3>
+          <p className="text-[16px] text-center pb-3 text-grey-91">
             Sign in to your account or create a new one
           </p>
         </div>
-        <div className="w-full h-[10%] bg-gray-100 rounded-lg p-2 flex justify-center items-center">
-          <div className="w-full h-full flex justify-between items-center">
+        <div className="w-full h-[10%] bg-grey-ef rounded-lg p-2 flex justify-center items-center">
+          <div className="w-full h-full flex justify-between items-center text-grey-18">
             <Button
               onClick={toggleAuth}
               className={`${

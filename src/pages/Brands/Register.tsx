@@ -87,47 +87,47 @@ export default function RegisterBrand() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-xl mx-auto p-6 bg-white shadow rounded"
+      className="max-w-xl mx-auto p-6 bg-white shadow rounded my-4"
     >
-      <h2 className="text-xl font-semibold mb-4">Register new Brand</h2>
+      <h2 className="text-[32px] font-bold text-center mb-4 text-grey-2c">Register new Brand</h2>
 
-      <label className="block mb-2 font-medium">
+      <label className="block mb-1 font-semibold text-grey-2c text-[14px]">
         Brand Name<span className="text-red-500">*</span>
       </label>
       <Input
         value={brandInfo.name}
         name="name"
         placeholder="Enter brand name"
-        className="w-full"
+        className="w-full border-grey-ef outline-grey-91 rounded-[8px]"
         onChange={handleChange}
       />
       {errors.name && (
         <p className="text-red-500 text-sm mt-1">{errors.name}</p>
       )}
 
-      <label className="block mb-2 font-medium mt-4">Description</label>
+      <label className="block mb-1 font-semibold text-grey-2c text-[14px] mt-2">Description</label>
       <textarea
         name="description"
         value={brandInfo.description}
         placeholder="Enter description"
         onChange={handleChange}
-        className="w-full border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+        className="w-full px-4 py-2 border rounded-[8px] border-grey-ef outline-grey-91"
       />
 
-      <label className="block mb-2 font-medium mt-4">Website</label>
+      <label className="block mb-1 font-semibold text-grey-2c text-[14px] mt-2">Website</label>
       <Input
         type="url"
         name="website"
         value={brandInfo.website}
         placeholder="https://example.com"
-        className="w-full"
+        className="w-full border-grey-ef outline-grey-91 rounded-[8px]"
         onChange={handleChange}
       />
       {errors.website && (
         <p className="text-red-500 text-sm mb-2">{errors.website}</p>
       )}
 
-      <label className="block mb-2 font-medium mt-4">
+      <label className="block mb-1 font-semibold text-grey-2c text-[14px] mt-2">
         SVG Icon (as HTML string)
       </label>
       <textarea
@@ -135,13 +135,13 @@ export default function RegisterBrand() {
         value={brandInfo.svgIcon}
         placeholder="<svg>...</svg>"
         onChange={handleChange}
-        className="w-full h-36 border px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+        className="w-full px-4 py-2 border border-grey-ef outline-grey-91 rounded-[8px]"
       />
 
       <button
         type="submit"
         disabled={brandMutation.isPending}
-        className="mt-6 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition disabled:opacity-50"
+        className="mt-6 w-full bg-grey-2c text-[14px] font-semibold text-white py-2 rounded hover:bg-grey-18 active:bg-grey-18 transition disabled:opacity-50"
       >
         {brandMutation.isPending ? "Registering..." : "Register Brand"}
       </button>

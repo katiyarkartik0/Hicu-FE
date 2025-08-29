@@ -21,10 +21,10 @@ const SidebarLink: FC<SidebarLinkProps> = ({
     to={to}
     end={end}
     className={({ isActive }) =>
-      `flex items-center px-4 py-2 rounded-lg transition ${
+      `flex items-center px-4 py-2 rounded-[8px] transition ${
         isActive
-          ? "bg-blue-100 text-blue-600"
-          : "text-gray-700 hover:bg-gray-100 transition"
+          ? "bg-grey-ef text-grey-18"
+          : "text-grey-2c hover:bg-grey-ef hover:text-grey-18 transition"
       }`
     }
   >

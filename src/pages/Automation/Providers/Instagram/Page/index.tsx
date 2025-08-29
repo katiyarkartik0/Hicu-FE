@@ -43,16 +43,16 @@ const Page: React.FC = () => {
 
   return (
     <>
-      <div className="flex space-x-2 mt-4 md:mt-0">
+      <div className="flex space-x-2 mt-4 md:mt-0 mb-4 w-full">
         <button
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 flex items-center space-x-2"
+          className="md:w-[200px] px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 flex items-center justify-center  text-[16px] font-semibold"
           onClick={handleSyncProfile}
         >
           <span>Sync Profile</span>
         </button>
 
         <button
-          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 flex items-center space-x-2"
+          className="text-[16px] font-semibold md:w-[200px] justify-center px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 disabled:opacity-50 flex items-center"
           onClick={hanldeSyncPosts}
         >
           <span>Sync Posts</span>

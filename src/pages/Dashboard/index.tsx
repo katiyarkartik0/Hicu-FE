@@ -33,15 +33,15 @@ function Dashboard() {
       <div className="w-full">
         <div className="flex justify-center">
           <div className="h-full w-[95%]">
-            <div className="w-full bg-gray-100 rounded-lg p-2 flex justify-center items-center">
-              <div className="w-full h-full flex justify-between items-center gap-2">
+            <div className="w-full bg-grey-ef rounded-lg p-2 flex justify-center items-center">
+              <div className="w-full h-full flex justify-between items-center gap-2 text-grey-18">
                 {TABS.map((tab) => (
                   <Button
                     key={tab.key}
                     onClick={() => setActiveTab(tab.key)}
                     className={`${
                       activeTab === tab.key ? "bg-white" : ""
-                    } rounded-md font-medium w-full border-none`}
+                    } rounded-md font-medium w-full border-none text-[13px] sm:text-[16px]`}
                   >
                     {tab.label}
                   </Button>
