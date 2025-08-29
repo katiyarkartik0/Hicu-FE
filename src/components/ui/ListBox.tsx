@@ -48,7 +48,7 @@ const ListBox: React.FC<ListBoxProps> = ({
 
       {open && (
         <div
-          className={`absolute z-10 mt-2 min-w-full bg-white border border-gray-200 rounded-md shadow-lg ${
+          className={`absolute z-10 mt-2 min-w-full rounded-[8px] bg-white border border-gray-ef shadow-lg ${
             alignRight ? "right-0" : "left-0"
           }`}
         >
@@ -56,7 +56,7 @@ const ListBox: React.FC<ListBoxProps> = ({
             <div
               onClick={() => handleSelect(item)}
               key={index}
-              className="px-4 py-2 hover:bg-gray-100 transition text-sm cursor-pointer"
+              className=" hover:bg-gray-100 transition text-sm cursor-pointer"
             >
               {item.element}
             </div>

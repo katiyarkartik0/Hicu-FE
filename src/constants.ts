@@ -3,7 +3,7 @@ let API_BASE_URL = "";
 if (process.env.NODE_ENV === "production") {
   API_BASE_URL = "https://api.hicu.co.in";
 } else {
-  API_BASE_URL = "http://localhost:5000";
+  API_BASE_URL = "https://api.hicu.co.in";
 }
 
 export default API_BASE_URL;

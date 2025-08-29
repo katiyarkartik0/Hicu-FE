@@ -18,9 +18,9 @@ function Provider({
     <Link
       reloadDocument={reloadDocument}
       to={to}
-      className={`flex items-center px-4 py-2 rounded-lg transition"text-gray-700 hover:bg-gray-100`}
+      className={`flex items-center px-4 py-2 rounded-[8px] transition text-grey-2c hover:bg-grey-ef hover:text-grey-18 active:bg-grey-ef active:text-grey-18 overflow-hidden`}
     >
-      <div className="flex items-center gap-2 px-1 py-1 rounded-md ">
+      <div className="flex items-center gap-2 px-1 py-1 rounded-md">
         {Icon}
         <span className="text-sm font-medium">{label}</span>
       </div>

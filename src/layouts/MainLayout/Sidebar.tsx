@@ -100,8 +100,8 @@ function Sidebar() {
           isMobileOpen ? "translate-x-0" : "-translate-x-full"
         } md:w-60`}
       >
-        <div className="flex items-center justify-between md:hidden mb-4">
-          <Link to="dashboard" className="font-bold text-lg px-1">
+        <div className="w-full flex items-center justify-between md:hidden mb-4">
+          <Link to="dashboard" className="font-bold text-lg px-1 text-grey-18">
             HiCu
           </Link>
           <button onClick={() => setIsMobileOpen(false)}>
@@ -110,7 +110,7 @@ function Sidebar() {
         </div>
 
         <div className="hidden md:block w-full mb-4">
-          <Link to="/dashboard" className="font-bold text-lg px-1">
+          <Link to="/dashboard" className="font-bold text-lg px-1 text-grey-18">
             HiCu
           </Link>
         </div>
@@ -143,7 +143,7 @@ function Sidebar() {
             />
           </div>
 
-          <h2 className="text-sm px-2 font-semibold mt-6">Account</h2>
+          <h2 className="text-sm px-2 font-bold mt-6 text-grey-2c">Account</h2>
           <div className="my-2 flex flex-col gap-2">
             <SidebarLink
               end={false}

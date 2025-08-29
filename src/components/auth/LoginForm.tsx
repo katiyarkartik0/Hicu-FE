@@ -8,7 +8,6 @@ import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useNavigate } from "react-router-dom";
 
-
 import { LOCAL_STORAGE_KEY, storage } from "@/lib/utils";
 import { Eye, EyeOff } from "lucide-react";
 import { DEFAULT_ICON_SIZE, DEFAULT_STROKE_WIDTH } from "@/lib/style";
@@ -28,7 +27,7 @@ const useLogin = function () {
     onError: function (err) {
       console.log(err);
     },
-    onSuccess: ({ accessToken,member }) => {
+    onSuccess: ({ accessToken, member }) => {
       storage.set(LOCAL_STORAGE_KEY.ACCESS_TOKEN, accessToken);
       storage.set(LOCAL_STORAGE_KEY.MEMBER_DETAILS, JSON.stringify(member));
       setAccessToken(accessToken);
@@ -74,11 +73,18 @@ function LoginForm() {
       className="h-[50%] w-full flex flex-col justify-between"
     >
       <div className="flex flex-col">
-        <label htmlFor="email">Email</label>
+        <label
+          htmlFor="email"
+          className="text-[12px] font-bold text-grey-2c pt-2"
+        >
+          Email
+        </label>
+
         <Input
           id="email"
           name="email"
           placeholder="name@example.com"
+          className="w-full border-1 border-grey-ef px-2 py-2 focus:border-grey-91 focus:outline-none"
           value={formData.email}
           onChange={handleChange}
         />
@@ -86,7 +92,12 @@ function LoginForm() {
 
       <div className="flex flex-col">
         <div className="flex justify-between items-center">
-          <label htmlFor="password">Password</label>
+          <label
+            htmlFor="password"
+            className="text-[12px] font-bold text-grey-2c pt-2"
+          >
+            Password
+          </label>
           {/* <a className="text-blue-600" href="#">
             Forgot Password?
           </a> */}
@@ -99,26 +110,36 @@ function LoginForm() {
             placeholder="•••••••"
             value={formData.password}
             onChange={handleChange}
-            className="w-full"
+            className="w-full border-1 border-grey-ef px-2 py-2 focus:border-grey-91 focus:outline-none"
           />
           <button
             type="button"
             className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
             onClick={togglePasswordVisibility}
           >
-            {isPasswordVisible ? <EyeOff strokeWidth={DEFAULT_STROKE_WIDTH} size={DEFAULT_ICON_SIZE}/> : <Eye strokeWidth={DEFAULT_STROKE_WIDTH} size={DEFAULT_ICON_SIZE}/>}
+            {isPasswordVisible ? (
+              <EyeOff
+                strokeWidth={DEFAULT_STROKE_WIDTH}
+                size={DEFAULT_ICON_SIZE}
+              />
+            ) : (
+              <Eye
+                strokeWidth={DEFAULT_STROKE_WIDTH}
+                size={DEFAULT_ICON_SIZE}
+              />
+            )}
           </button>
         </div>
       </div>
 
       {loginMutation.isError && (
-        <div className="text-red-600 text-sm">
+        <div className="text-[12px] font-semibold text-red-600 leading-none">
           {(loginMutation.error as Error)?.message || "Login failed"}
         </div>
       )}
 
       <Button
-        className="w-full text-white bg-blue-500 disabled:opacity-50"
+        className="w-full text-white text-[12px] font-bold bg-grey-2c disabled:opacity-50 mt-3 hover:bg-grey-18 active:bg-grey-18"
         type="submit"
         disabled={loginMutation.isPending}
       >

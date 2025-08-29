@@ -12,11 +12,11 @@ function Collaborator() {
           <ModalContent />
         </Modal>
       )}
-      <div className="w-full h-auto p-7 border rounded-md">
-        <div className="mb-4 flex justify-between items-center">
+      <div className="w-full h-auto p-7 border border-grey-ef rounded-md">
+        <div className="mb-4 flex flex-col md:flex-row md:justify-between md:items-center">
           <div>
-            <h2 className="font-semibold text-2xl">Team Members</h2>
-            <p className="font-light text-gray-500">
+            <h2 className="font-bold text-[24px] text-grey-2c leading-none">Team Members</h2>
+            <p className="font-light text-grey-91 text-[14px]">
               Manage who has access to your brand
             </p>
           </div>
@@ -24,7 +24,7 @@ function Collaborator() {
             onClick={() => {
               setIsOpen(true);
             }}
-            className="px-5 py-2 border border-2 bg-blue-600 text-white rounded-md flex"
+            className="px-5 py-2 border border-grey-2c hover:bg-grey-2c hover:text-white active:bg-grey-2c active:text-white rounded-[8px] flex font-semibold justify-center mt-[8px] md:mt-0"
             type="submit"
           >
             <svg
@@ -33,7 +33,7 @@ function Collaborator() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6 mr-2"
+              className="size-6 mr-[2px] md:mr-2"
             >
               <path
                 strokeLinecap="round"
@@ -45,19 +45,19 @@ function Collaborator() {
           </button>
         </div>
         <div>
-          <div className="border-b-2">
+          <div className="border-b-2 border-grey-ef">
             <div className="flex items-center justify-between py-4">
               <div className="flex items-center gap-4">
-                <div className="h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center text-white">
+                <div className="h-8 w-8 text-[12px] md:text-[16px] md:h-10 md:w-10 rounded-full bg-grey-2c font-bold uppercase flex items-center justify-center text-white">
                   JD
                 </div>
                 <div>
-                  <p className="font-medium">John Doe</p>
-                  <p className="text-sm text-muted-foreground">john@hiku.com</p>
+                  <p className="text-grey-2c capitalize font-semibold leading-none text-[14px] md:text-[16px]">John Doe</p>
+                  <p className="text-muted-foreground text-grey-91 text-[12px] md:text-[14px]">john@hiku.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className="bg-gray-100 text-primary text-xs px-2 py-1 rounded-full">
+                <span className="bg-blue-cc text-blue-dd font-semibold text-[8px] uppercase px-2 py-1 rounded-full">
                   Admin
                 </span>
                 <svg
@@ -66,7 +66,7 @@ function Collaborator() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-5"
+                  className="size-5 text-grey-2c hover:cursor-pointer"
                 >
                   <path
                     strokeLinecap="round"
@@ -79,19 +79,19 @@ function Collaborator() {
           </div>
         </div>
         <div>
-          <div className="border-b-2">
+          <div className="border-b-2 border-grey-ef">
             <div className="flex items-center justify-between py-4">
               <div className="flex items-center gap-4">
-                <div className="h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center text-white">
+                <div className="h-8 w-8 text-[12px] md:text-[16px] md:h-10 md:w-10 rounded-full bg-grey-2c font-bold uppercase flex items-center justify-center text-white">
                   JD
                 </div>
                 <div>
-                  <p className="font-medium">Max Doe</p>
-                  <p className="text-sm text-muted-foreground">max@hicu.com</p>
+                  <p className="text-grey-2c capitalize font-semibold leading-none text-[14px] md:text-[16px]">Max Doe</p>
+                  <p className="text-muted-foreground text-grey-91 text-[12px] md:text-[14px]">max@hicu.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className="bg-gray-100 text-primary text-xs px-2 py-1 rounded-full">
+                <span className="bg-blue-cc text-blue-dd font-semibold text-[8px] uppercase px-2 py-1 rounded-full">
                   Admin
                 </span>
                 <svg
@@ -100,7 +100,7 @@ function Collaborator() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-5"
+                  className="size-5 text-grey-2c hover:cursor-pointer"
                 >
                   <path
                     strokeLinecap="round"
@@ -116,16 +116,16 @@ function Collaborator() {
           <div className="">
             <div className="flex items-center justify-between pt-4">
               <div className="flex items-center gap-4">
-                <div className="h-10 w-10 rounded-full bg-gray-900 flex items-center justify-center text-white">
+                <div className="h-8 w-8 text-[12px] md:text-[16px] md:h-10 md:w-10 rounded-full bg-grey-2c font-bold uppercase flex items-center justify-center text-white">
                   JD
                 </div>
                 <div>
-                  <p className="font-medium">Jane Doe</p>
-                  <p className="text-sm text-muted-foreground">jane@hicu.com</p>
+                  <p className="text-grey-2c capitalize font-semibold leading-none text-[14px] md:text-[16px]">Jane Doe</p>
+                  <p className="text-muted-foreground text-grey-91 text-[12px] md:text-[14px]">jane@hicu.com</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <span className="bg-gray-100 text-primary text-xs px-2 py-1 rounded-full">
+                <span className="bg-blue-cc text-blue-dd font-semibold text-[8px] uppercase px-2 py-1 rounded-full">
                   Admin
                 </span>
                 <svg
@@ -134,7 +134,7 @@ function Collaborator() {
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="size-5"
+                  className="size-5 text-grey-2c hover:cursor-pointer"
                 >
                   <path
                     strokeLinecap="round"

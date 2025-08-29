@@ -55,10 +55,10 @@ const JSONRenderer: React.FC<JSONRendererProps> = ({ data, level = 0 }) => {
                 <Info size={16} className="opacity-40" />
               )}
               <span className="ml-1 font-mono text-white">
-                <span className="text-purple-400">{key}</span>
-                {": "}
+                <span className="text-purple-400 capitalize text-[13px]">{key}</span>
+                {":"}
                 {!isObject && (
-                  <span className="text-blue-300">{JSON.stringify(value)}</span>
+                  <span className="text-blue-300 text-[13px]">{JSON.stringify(value)}</span>
                 )}
               </span>
             </div>
@@ -85,9 +85,9 @@ export const Card: React.FC<{ prospect: Prospect }> = ({ prospect }) => {
       <h2 className="text-xl font-bold mb-2 text-cyan-300">
         {prospect.username}
       </h2>
-      <p className="text-sm text-gray-400 mb-2">User ID: {prospect.userId} | Account ID: {prospect.accountId}</p>
+      <p className="text-[12px] text-grey-91 mb-2">User ID: {prospect.userId} | Account ID: {prospect.accountId}</p>
 
-      <h3 className="text-green-400 text-lg mb-1">Details</h3>
+      <h3 className="text-green-400 font-semibold text-[14px] mb-1">Details</h3>
       <div className="text-sm font-mono bg-gray-800/50 p-4 rounded-xl overflow-x-auto border border-gray-600">
         <JSONRenderer data={prospect.details} />
       </div>

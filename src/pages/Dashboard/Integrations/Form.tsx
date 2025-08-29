@@ -59,12 +59,12 @@ function Form({
     <form
       onSubmit={handleSubmit}
       onChange={handleChange}
-      className="p-4 border rounded mb-4"
+      className="p-4 border border-grey-ef rounded mb-4"
     >
       <div className="flex gap-2">
         {" "}
         <div className="w-8 h-8 [&>svg]:w-full [&>svg]:h-full [&>svg]:object-contain" dangerouslySetInnerHTML={{ __html: integration.image }} />
-        <h2 className="text-xl font-bold mb-2">{integration.name}</h2>
+        <h2 className="text-xl font-bold mb-2 text-grey-18">{integration.name}</h2>
       </div>
 
       {integration.config.map(
@@ -74,12 +74,12 @@ function Form({
           displayName: fieldDisplayName,
         }) => (
           <div key={fieldName} className="mb-2">
-            <label className="block mb-1 capitalize">{fieldDisplayName}</label>
+            <label className="block mb-1 capitalize text-grey-2c font-semibold">{fieldDisplayName}</label>
             <input
               type={fieldType}
               name={fieldName}
               defaultValue={formData[fieldName]}
-              className="border p-2 w-full"
+              className="border border-grey-ef outline-[1px] outline-grey-91 p-2 w-full text-blue-dd text-[14px]"
               required
             />
           </div>
@@ -87,7 +87,7 @@ function Form({
       )}
       <button
         type="submit"
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className="border border-grey-2c text-grey-2c px-4 py-2 font-semibold rounded-[8px] active:bg-grey-2c active:text-white hover:bg-grey-2c hover:text-white"
       >
         {brandConfiguration.isPending ? <Loader /> : "Save changes"}
       </button>

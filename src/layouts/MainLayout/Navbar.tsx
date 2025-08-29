@@ -3,13 +3,13 @@ import { Bell, Search } from "lucide-react";
 function Navbar() {
   return (
     <div className="h-16 px-4 border-b flex items-center justify-between w-full">
-      <div className="w-full md:w-[40%] relative">
+      <div className="md:w-[40%] relative flex-grow md:flex-grow-0 flex justify-end md:justify-start">
         <input
           type="text"
-          className="border h-10 pl-10 pr-3 rounded-md w-full text-sm"
+          className="border h-10 pl-10 pr-3 rounded-md w-auto md:w-full text-sm"
           placeholder="Search..."
         />
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+        <Search className="absolute right-[11.5rem] md:left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
       </div>
 
       <div className="flex items-center gap-4 ml-4">
