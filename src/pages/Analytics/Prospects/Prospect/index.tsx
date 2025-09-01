@@ -1,5 +1,7 @@
+import { DetailCard } from "@/components/analytics/prospect/DetailCard";
 import { useNumericParam } from "@/hooks/react-router";
 import { instagramService } from "@/services/instagram";
+import { prospectsService } from "@/services/prospects";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 
@@ -10,25 +12,73 @@ const Prospect = () => {
   if (!userId || !brandId) {
     return null;
   }
-console.log(userId,brandId)
+  const prospect = useQuery({
+    queryKey: ["prospect", brandId] as const,
+    enabled: !!brandId,
+    queryFn: ({ queryKey }) => {
+      const [, brandId] = queryKey;
+      return prospectsService.fetchProspect({ brandId, userId });
+    },
+  });
   const threads = useQuery({
     queryFn: () => instagramService.getThreads({ brandId, userId }),
     queryKey: ["threads", brandId, userId],
   });
-console.log(threads.data)
+
+  if (prospect.isPending || !prospect.data)
+    return <div className="p-4">Loading prospect...</div>;
   if (threads.isLoading) return <div className="p-4">Loading threads...</div>;
-  if (threads.error) return <div className="p-4 text-red-500">Error loading threads</div>;
+  if (threads.error)
+    return <div className="p-4 text-red-500">Error loading threads</div>;
   if (!threads.data || threads.data.length === 0) {
     return <div className="p-4 text-gray-500">No threads found</div>;
   }
 
   return (
-    <div className="p-4 space-y-6">
-      <h1 className="text-2xl font-bold">Threads for {userId}</h1>
-      <div className="space-y-6">
-        {threads.data.map((thread: any) => (
-          <Thread key={thread.id} thread={thread} />
-        ))}
+    <div className="p-4">
+      <div className="flex gap-6">
+        {/* Left column: Avatar + Prospect Card */}
+        <div className="w-64 space-y-4">
+          {/* Mock Avatar */}
+          <div className="flex flex-col items-center">
+            <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-pink-500 to-yellow-500 flex items-center justify-center text-white text-2xl font-bold shadow-md">
+              {prospect.data.username?.[0]?.toUpperCase() || "?"}
+            </div>
+            <p className="mt-2 text-sm font-semibold text-gray-800">
+              {prospect.data.username || "Unknown"}
+            </p>
+          </div>
+          <DetailCard prospect={prospect.data} />
+        </div>
+
+        {/* Middle column: Threads */}
+        <div className="flex-1 space-y-4 overflow-y-auto max-h-[75vh] pr-4">
+          {threads.data.map((thread: any) => (
+            <Thread key={thread.id} thread={thread} />
+          ))}
+        </div>
+
+        {/* Right column: DM Window (mock) */}
+        <div className="w-80 flex flex-col border rounded-xl shadow-sm">
+          <div className="p-3 border-b font-semibold bg-gray-50">
+            Direct Message
+          </div>
+          <div className="flex-1 p-3 overflow-y-auto text-sm text-gray-500">
+            <p className="text-center text-gray-400 mt-10">
+              No messages yet. Start a conversation!
+            </p>
+          </div>
+          <div className="p-3 border-t flex items-center gap-2">
+            <input
+              type="text"
+              placeholder="Type a message..."
+              className="flex-1 border rounded-full px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            />
+            <button className="px-3 py-2 bg-indigo-500 text-white rounded-full text-sm hover:bg-indigo-600">
+              Send
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

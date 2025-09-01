@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { ChevronDown, ChevronRight, Info } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-type JSONValue = string | number | boolean | null | JSONValue[] | { [key: string]: JSONValue };
+type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JSONValue[]
+  | { [key: string]: JSONValue };
 
 type Prospect = {
   id: number;
@@ -38,7 +44,7 @@ const JSONRenderer: React.FC<JSONRendererProps> = ({ data, level = 0 }) => {
     );
   }
   return (
-    <div className="pl-4 border-l border-gray-600" >
+    <div className="pl-4 border-l border-gray-600">
       {Object.entries(data).map(([key, value]) => {
         const isObject = typeof value === "object" && value !== null;
         const isCollapsed = collapsed[key];
@@ -50,15 +56,23 @@ const JSONRenderer: React.FC<JSONRendererProps> = ({ data, level = 0 }) => {
               onClick={() => isObject && toggle(key)}
             >
               {isObject ? (
-                isCollapsed ? <ChevronRight size={16} /> : <ChevronDown size={16} />
+                isCollapsed ? (
+                  <ChevronRight size={16} />
+                ) : (
+                  <ChevronDown size={16} />
+                )
               ) : (
                 <Info size={16} className="opacity-40" />
               )}
               <span className="ml-1 font-mono text-white">
-                <span className="text-purple-400 capitalize text-[13px]">{key}</span>
+                <span className="text-purple-400 capitalize text-[13px]">
+                  {key}
+                </span>
                 {":"}
                 {!isObject && (
-                  <span className="text-blue-300 text-[13px]">{JSON.stringify(value)}</span>
+                  <span className="text-blue-500 text-[13px]">
+                    {JSON.stringify(value)}
+                  </span>
                 )}
               </span>
             </div>
@@ -74,23 +88,10 @@ const JSONRenderer: React.FC<JSONRendererProps> = ({ data, level = 0 }) => {
   );
 };
 
-export const Card: React.FC<{ prospect: Prospect }> = ({ prospect }) => {
-  const navigate = useNavigate();
-
-  const handleNavigate = ()=>{
-    navigate(`${prospect.userId}`)
-  }
+export const DetailCard: React.FC<{ prospect: Prospect }> = ({ prospect }) => {
   return (
-    <div onClick={handleNavigate} className="p-6 bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] text-white rounded-2xl shadow-2xl border border-gray-700">
-      <h2 className="text-xl font-bold mb-2 text-cyan-300">
-        {prospect.username}
-      </h2>
-      <p className="text-[12px] text-grey-91 mb-2">User ID: {prospect.userId} | Account ID: {prospect.accountId}</p>
-
-      <h3 className="text-green-400 font-semibold text-[14px] mb-1">Details</h3>
-      <div className="text-sm font-mono bg-gray-800/50 p-4 rounded-xl overflow-x-auto border border-gray-600">
-        <JSONRenderer data={prospect.details} />
-      </div>
+    <div className="text-sm font-mono p-4 rounded-xl overflow-x-auto border">
+      <JSONRenderer data={prospect.details} />
     </div>
   );
 };

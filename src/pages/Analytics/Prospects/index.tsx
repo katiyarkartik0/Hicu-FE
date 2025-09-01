@@ -2,7 +2,7 @@ import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { prospectsService } from "@/services/prospects";
 import { useNumericParam } from "@/hooks/react-router";
-import { Card } from "@/pages/Analytics/Prospects/Card";
+import { Tile } from "@/components/analytics/prospect/Tile";
 type JSONValue =
   | string
   | number
@@ -11,7 +11,7 @@ type JSONValue =
   | JSONValue[]
   | { [key: string]: JSONValue };
 
-type Prospect = {
+export type Prospect = {
   id: number;
   userId: string;
   username?: string;
@@ -21,13 +21,16 @@ type Prospect = {
 
 export const Prospects: React.FC = () => {
   const brandId = useNumericParam("brandId");
+  if (!brandId) {
+    return null;
+  }
 
   const { data: prospects, isPending } = useQuery({
     queryKey: ["prospects", brandId] as const,
     enabled: !!brandId,
     queryFn: ({ queryKey }) => {
       const [, brandId] = queryKey;
-      return prospectsService.fetchAllProspect(brandId!);
+      return prospectsService.fetchAllProspects(brandId);
     },
   });
 
@@ -39,9 +42,9 @@ export const Prospects: React.FC = () => {
     return <div className="text-yellow-400 p-4">No prospects found.</div>;
 
   return (
-    <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-      {prospects.map((prospect: Prospect) => (
-        <Card key={prospect.id} prospect={prospect} />
+    <div className="gap-4">
+      {prospects.map((p: Prospect) => (
+        <Tile key={p.id} prospect={p} />
       ))}
     </div>
   );
