@@ -154,4 +154,34 @@ export const instagramService = {
 
     return result;
   },
+
+  async getSavedConversation({
+    brandId,
+    userId,
+  }: {
+    brandId: number;
+    userId: string;
+  }) {
+    const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+    const accountId = brandId;
+    const userIdFromWebhookPayload = userId;
+    const response = await fetch(
+      `${API_BASE_URL}/instagram/getSavedConversation?userIdFromWebhookPayload=${userIdFromWebhookPayload}&accountId=${accountId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(
+        result?.message || `Failed to sync posts (HTTP ${response.status})`
+      );
+    }
+
+    return result.data;
+  },
 };

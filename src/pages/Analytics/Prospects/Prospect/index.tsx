@@ -24,6 +24,10 @@ const Prospect = () => {
     queryFn: () => instagramService.getThreads({ brandId, userId }),
     queryKey: ["threads", brandId, userId],
   });
+  const savedConversation = useQuery({
+    queryFn: () => instagramService.getSavedConversation({ brandId, userId }),
+    queryKey: ["savedConversation", brandId, userId],
+  });
 
   if (prospect.isPending || !prospect.data)
     return <div className="p-4">Loading prospect...</div>;
@@ -58,16 +62,42 @@ const Prospect = () => {
           ))}
         </div>
 
-        {/* Right column: DM Window (mock) */}
+        {/* Right column: DM Window */}
         <div className="w-80 flex flex-col border rounded-xl shadow-sm">
           <div className="p-3 border-b font-semibold bg-gray-50">
             Direct Message
           </div>
-          <div className="flex-1 p-3 overflow-y-auto text-sm text-gray-500">
-            <p className="text-center text-gray-400 mt-10">
-              No messages yet. Start a conversation!
-            </p>
+
+          {/* Conversation messages */}
+          <div className="flex-1 p-3 overflow-y-auto text-sm space-y-3 max-h-[60vh]">
+            {savedConversation.isLoading && (
+              <p className="text-gray-400 text-center mt-10">
+                Loading conversation...
+              </p>
+            )}
+            {savedConversation.error && (
+              <p className="text-red-500 text-center mt-10">
+                Error loading conversation
+              </p>
+            )}
+            {!savedConversation.isLoading &&
+            savedConversation.data &&
+            savedConversation.data.length > 0 ? (
+              savedConversation.data.map((msg: any) => (
+                <MessageBubble
+                  key={msg.id}
+                  message={msg}
+                  isProspect={msg.senderId === userId}
+                />
+              ))
+            ) : (
+              <p className="text-gray-400 text-center mt-10">
+                No messages yet. Start a conversation!
+              </p>
+            )}
           </div>
+
+          {/* Input */}
           <div className="p-3 border-t flex items-center gap-2">
             <input
               type="text"
@@ -121,6 +151,35 @@ const Thread = ({ thread }: { thread: any }) => {
           ))}
         </div>
       )}
+    </div>
+  );
+};
+
+type MessageBubbleProps = {
+  message: any;
+  isProspect: boolean;
+};
+
+const MessageBubble = ({ message, isProspect }: MessageBubbleProps) => {
+  return (
+    <div className={`flex ${isProspect ? "justify-start" : "justify-end"}`}>
+      <div
+        className={`max-w-[70%] px-3 py-2 rounded-2xl text-sm shadow break-words
+          ${
+            isProspect
+              ? "bg-gray-200 text-gray-800"
+              : "bg-indigo-500 text-white"
+          }
+        `}
+      >
+        <p>{message.messageText}</p>
+        <span className="block text-[10px] mt-1 opacity-70">
+          {new Date(message.timestamp).toLocaleTimeString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </span>
+      </div>
     </div>
   );
 };
