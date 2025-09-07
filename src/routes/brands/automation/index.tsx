@@ -1,3 +1,4 @@
+import AutomationBuilder from "@/pages/Automation/Providers/Instagram/AutomationBuilder";
 import { lazy } from "react";
 import { Outlet, RouteObject } from "react-router-dom";
 
@@ -21,6 +22,10 @@ const automationRoutes: RouteObject = {
       path: "instagram/create/:mediaId",
       element: <CommentAutomationForm />,
     },
+    {
+      path:"instagram/create/:mediaId/buildAutomation",
+      element:<AutomationBuilder/>
+    }
   ],
 };
 
