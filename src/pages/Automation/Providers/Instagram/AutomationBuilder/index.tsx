@@ -54,7 +54,15 @@ export default function AutomationBuilder() {
 
   // Add a new node to the canvas
   const handleAddNode = (
-    type: "trigger" | "end" | "decision" | "dm" | "commentReply"
+    type:
+      | "trigger"
+      | "end"
+      | "decision"
+      | "dm"
+      | "commentReply"
+      | "commentReplyAiVectorDb"
+      | "commentReplyAi"
+      | "commentReplyManual"
   ) => {
     const id = `${type}-${nodes.length + 1}`;
     const position = { x: Math.random() * 400, y: Math.random() * 400 }; // quick demo positioning
