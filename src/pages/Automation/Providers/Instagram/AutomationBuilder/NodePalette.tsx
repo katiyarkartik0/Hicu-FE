@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  PlusCircle,
-  Split,
-  Send,
-  Play,
-  Database,
-  Brain,
-  Code2,
-} from "lucide-react";
+import { nodeDefinitions } from "./Nodes";
+import { XYPosition, Node } from "@xyflow/react";
 
 type NodeType =
   | "trigger"
@@ -20,61 +13,38 @@ type NodeType =
   | "commentReplyManual";
 
 interface NodePaletteProps {
-  onAddNode: (type: NodeType) => void;
-  hasTrigger: boolean;
+  setNodes: React.Dispatch<React.SetStateAction<Node[]>>;
 }
 
-const nodes = [
-  {
-    type: "trigger" as NodeType,
-    label: "__start__",
-    icons: [Play],
-    description: "Entry point of the flow (only one allowed).",
-  },
-  {
-    type: "end" as NodeType,
-    label: "__end__",
-    icons: [PlusCircle],
-    description: "Exit point of the flow (multiple allowed).",
-  },
-  {
-    type: "decision" as NodeType,
-    label: "Decision",
-    icons: [Split],
-    description: "Branch logic based on conditions.",
-  },
-  {
-    type: "dm" as NodeType,
-    label: "Send DM",
-    icons: [Send],
-    description: "Send a direct message automatically.",
-  },
-  {
-    type: "commentReplyAiVectorDb" as NodeType,
-    label: "Smart Comment Reply(enhanced)",
-    icons: [Brain, Database],
-    description: "Reply intelligently to comments using AI and vector search.",
-  },
-  {
-    type: "commentReplyAi" as NodeType,
-    label: "Smart Comment Reply",
-    icons: [Brain],
-    description: "Reply intelligently to comments using AI.",
-  },
-  {
-    type: "commentReplyManual" as NodeType,
-    label: "Comment Reply",
-    icons: [Code2],
-    description: "Reply to comment manually",
-  },
-];
+const nodes = nodeDefinitions;
 
-export const NodePalette: React.FC<NodePaletteProps> = ({
-  onAddNode,
-  hasTrigger,
-}) => {
+export const NodePalette: React.FC<NodePaletteProps> = ({ setNodes }) => {
+  const handleAddNode = (type: NodeType) => {
+    const def = nodeDefinitions.find((nd) => nd.type === type);
+    if (!def) return;
+
+    const id = `${type}-${Date.now()}`; // safer unique id
+    const position: XYPosition = {
+      x: Math.random() * 400,
+      y: Math.random() * 400,
+    };
+
+    setNodes((prev) => [
+      ...prev,
+      {
+        id,
+        type,
+        position,
+        data: {
+          label: def.label,
+          description: def.description,
+        },
+      },
+    ]);
+  };
+
   return (
-    <div className="w-64 bg-white shadow-lg rounded-2xl border flex flex-col max-h-[calc(100vh-40px)]">
+    <div className="w-64 bg-white shadow-lg rounded-2xl border flex flex-col max-h-[calc(80vh-40px)]">
       {/* Header stays fixed */}
       <h2 className="text-lg font-semibold text-gray-700 p-4 border-b">
         Node Palette
@@ -83,18 +53,11 @@ export const NodePalette: React.FC<NodePaletteProps> = ({
       {/* Scrollable area */}
       <div className="overflow-y-auto p-4 space-y-3">
         {nodes.map((node) => {
-          const disabled = node.type === "trigger" && hasTrigger;
-
           return (
             <button
               key={node.type}
-              onClick={() => !disabled && onAddNode(node.type)}
-              disabled={disabled}
-              className={`flex flex-col items-center p-3 rounded-xl border shadow-sm transition text-center w-full ${
-                disabled
-                  ? "bg-gray-100 text-gray-400 cursor-not-allowed"
-                  : "bg-gray-50 hover:bg-gray-100 cursor-pointer"
-              }`}
+              onClick={() => handleAddNode(node.type)}
+              className={`flex flex-col items-center p-3 rounded-xl border shadow-sm transition text-center w-full bg-gray-50 hover:bg-gray-100 cursor-pointer`}
             >
               {/* Icons horizontally aligned */}
               <div className="flex items-center justify-center gap-2 mb-2">
@@ -109,9 +72,7 @@ export const NodePalette: React.FC<NodePaletteProps> = ({
               {/* Description */}
               <p className="text-xs text-gray-500 mt-1">{node.description}</p>
 
-              {!disabled && (
-                <span className="mt-2 text-xs text-gray-500">+ Add</span>
-              )}
+              <span className="mt-2 text-xs text-gray-500">+ Add</span>
             </button>
           );
         })}

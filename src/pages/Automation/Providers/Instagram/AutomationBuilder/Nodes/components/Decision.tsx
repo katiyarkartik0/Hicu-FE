@@ -1,20 +1,15 @@
-import React, { useState } from "react";
-import { Handle, Position, NodeProps } from "@xyflow/react";
+import React, { useCallback, useState } from "react";
+import { Handle, Position, NodeProps, Node } from "@xyflow/react";
 
 interface DecisionProps extends NodeProps {
   data: {
     label: string;
   };
   style?: React.CSSProperties;
-  handleAddChild: (parentId: string, label: string) => void;
+  setNodes: React.Dispatch<React.SetStateAction<Node[]>>;
 }
 
-export default function Decision({
-  id,
-  data,
-  style,
-  handleAddChild,
-}: DecisionProps) {
+export default function Decision({ id, data, style, setNodes }: DecisionProps) {
   const [input, setInput] = useState("");
 
   const handleAdd = () => {
@@ -22,6 +17,26 @@ export default function Decision({
     handleAddChild(id, input.trim()); // delegate child creation to parent
     setInput("");
   };
+
+  const handleAddChild = useCallback(
+    (parentId: string, label: string) => {
+      setNodes((prev) => {
+        const newId = `child-${prev.length + 1}`;
+        return [
+          ...prev,
+          {
+            id: newId,
+            type: "default",
+            data: { label },
+            parentId,
+            position: { x: 100, y: 100 },
+            extent: "parent",
+          },
+        ];
+      });
+    },
+    [setNodes]
+  );
 
   return (
     <div
