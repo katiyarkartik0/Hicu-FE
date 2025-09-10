@@ -1,15 +1,15 @@
 import React from "react";
 import { Handle, Position, NodeProps } from "@xyflow/react";
-import { Brain, Database } from "lucide-react";
+import { Brain, Send } from "lucide-react";
 
-interface SmartCommentReplyEnProps extends NodeProps {
+interface SmartDmProps extends NodeProps {
   data: {
     label: string;
     description: string;
   };
 }
 
-const SmartCommentReplyEn: React.FC<SmartCommentReplyEnProps> = ({ data }) => {
+const SmartDm: React.FC<SmartDmProps> = ({ data }) => {
   return (
     <div className="flex flex-col items-center p-3 rounded-xl border shadow-sm bg-gray-50 hover:bg-gray-100 transition text-center w-64">
       {/* Top handle */}
@@ -22,7 +22,7 @@ const SmartCommentReplyEn: React.FC<SmartCommentReplyEnProps> = ({ data }) => {
       {/* Icons horizontally aligned */}
       <div className="flex items-center justify-center gap-2 mb-2">
         <Brain className="w-6 h-6 text-indigo-500" />
-        <Database className="w-6 h-6 text-indigo-500" />
+        <Send className="w-6 h-6 text-indigo-500" />
       </div>
 
       {/* Label */}
@@ -41,4 +41,4 @@ const SmartCommentReplyEn: React.FC<SmartCommentReplyEnProps> = ({ data }) => {
   );
 };
 
-export default SmartCommentReplyEn;
+export default SmartDm;

@@ -1,5 +1,6 @@
 import { Handle, Position } from "@xyflow/react";
 import React from "react";
+import { Play } from "lucide-react"; // ✅ optional trigger icon
 
 interface TriggerProps {
   id: string;
@@ -10,15 +11,20 @@ interface TriggerProps {
 
 export default function Trigger({ id, data }: TriggerProps) {
   return (
-    <div className="bg-green-500 text-white font-semibold px-4 py-2 rounded-xl shadow-md border border-green-600">
-      {/* Node Label */}
-      <div className="text-center">{data.label}</div>
+    <div className="flex flex-col items-center p-3 rounded-xl border shadow-sm bg-green-50 hover:bg-green-100 transition text-center w-56">
+      {/* Top icon */}
+      <div className="flex items-center justify-center mb-2">
+        <Play className="w-6 h-6 text-green-600" />
+      </div>
 
-      {/* Outgoing connection */}
+      {/* Label */}
+      <div className="font-medium text-green-700">{data.label}</div>
+
+      {/* Outgoing handle */}
       <Handle
         type="source"
         position={Position.Bottom}
-        className="!bg-white !border-2 !border-green-600"
+        className="w-3 h-3 bg-green-600"
       />
     </div>
   );

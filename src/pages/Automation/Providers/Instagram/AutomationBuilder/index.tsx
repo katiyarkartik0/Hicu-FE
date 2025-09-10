@@ -11,6 +11,7 @@ import { NodePalette } from "./NodePalette";
 import { nodeDefinitions } from "./Nodes";
 import useNodes from "@/hooks/automationBuilder/useNodes";
 import useEdges from "@/hooks/automationBuilder/useEdges";
+import { useMemo } from "react";
 
 function constructNodeTypes({
   setNodes,
@@ -29,7 +30,13 @@ export default function AutomationBuilder() {
   const { nodes, setNodes, onNodesChange } = useNodes();
   const { edges, onEdgesChange, onConnect } = useEdges();
 
-  const nodeTypes: NodeTypes = constructNodeTypes({ setNodes });
+  console.log(nodes,"nodes");
+  console.log(edges,"edges");
+
+  const nodeTypes: NodeTypes = useMemo(
+    () => constructNodeTypes({ setNodes }),
+    [setNodes]
+  );
 
   return (
     <div className="flex w-full h-full">
