@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Handle, Position, NodeProps } from "@xyflow/react";
-import { Brain, Database, MessageCircle } from "lucide-react";
+import { Brain, Database, Send } from "lucide-react";
 import Modal from "@/components/ui/Modal";
 import ModalContent from "./ModalContent";
-import { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
+import type { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 
-// Node props with data
-interface SmartCommentReplyEnProps extends NodeProps {
+interface SmartDmReplyEnProps extends NodeProps {
   data: {
     label: string;
     description: string;
@@ -14,13 +13,12 @@ interface SmartCommentReplyEnProps extends NodeProps {
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
 
-const SmartCommentReplyEn: React.FC<SmartCommentReplyEnProps> = ({
+const SmartDmReplyEn: React.FC<SmartDmReplyEnProps> = ({
   data,
-  id,
   setNodes,
+  id,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <>
       <Modal onClose={() => setIsModalOpen(false)} isOpen={isModalOpen}>
@@ -33,7 +31,7 @@ const SmartCommentReplyEn: React.FC<SmartCommentReplyEnProps> = ({
 
       <div
         onClick={() => setIsModalOpen(true)}
-        className="flex flex-col items-center p-3 rounded-xl border shadow-sm bg-gray-50 hover:bg-gray-100 transition text-center w-64 cursor-pointer"
+        className="flex flex-col items-center p-3 rounded-xl border shadow-sm bg-gray-50 hover:bg-gray-100 transition text-center w-64"
       >
         {/* Top handle */}
         <Handle
@@ -42,11 +40,11 @@ const SmartCommentReplyEn: React.FC<SmartCommentReplyEnProps> = ({
           className="w-3 h-3 bg-indigo-500"
         />
 
-        {/* Icons */}
+        {/* Icons horizontally aligned */}
         <div className="flex items-center justify-center gap-2 mb-2">
           <Brain className="w-6 h-6 text-indigo-500" />
           <Database className="w-6 h-6 text-indigo-500" />
-          <MessageCircle className="w-6 h-6 text-indigo-500" />
+          <Send className="w-6 h-6 text-indigo-500" />
         </div>
 
         {/* Label */}
@@ -66,4 +64,4 @@ const SmartCommentReplyEn: React.FC<SmartCommentReplyEnProps> = ({
   );
 };
 
-export default SmartCommentReplyEn;
+export default SmartDmReplyEn;

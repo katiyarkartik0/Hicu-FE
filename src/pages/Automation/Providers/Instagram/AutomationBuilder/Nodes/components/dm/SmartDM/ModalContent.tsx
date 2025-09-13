@@ -1,5 +1,4 @@
 import type { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
-import { Node } from "@xyflow/react";
 import { useState } from "react";
 
 interface ModalContentProps {
@@ -28,14 +27,23 @@ function ModalContent({
   return (
     <div className="flex flex-col gap-4 p-4">
       <h2 className="text-lg font-semibold text-gray-800">Set AI Prompt</h2>
-      <p className="text-xs text-gray-500">
-        You can use <br />
-        <code className="bg-gray-100 px-1 rounded">{`{{commenterUsername}}`}</code>{" "}
-        and
-        <code className="bg-gray-100 px-1 rounded">{`{{commentText}}`}</code>
-        <br /> in your prompt to dynamically refer to commenter's username and
-        comment text.
-      </p>
+      <p className="text-xs text-gray-500">You can use:</p>
+      <ul className="list-disc list-inside text-xs text-gray-500 space-y-1">
+        <li>
+          <code className="bg-gray-100 px-1 rounded">{`{{conversationHistory}}`}</code>{" "}
+          to dynamically refer to the history of conversation in DMs with the
+          commenter.
+        </li>
+        <li>
+          <code className="bg-gray-100 px-1 rounded">{`{{commenterUsername}}`}</code>{" "}
+          to insert the commenter's username.
+        </li>
+        <li>
+          <code className="bg-gray-100 px-1 rounded">{`{{commentText}}`}</code>{" "}
+          to insert the actual comment text.
+        </li>
+      </ul>
+
       <textarea
         value={aiPrompt}
         onChange={(e) => setAiPrompt(e.target.value)}

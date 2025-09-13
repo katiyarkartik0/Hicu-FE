@@ -21,7 +21,7 @@ const routes: RouteObject[] = [
       },
       brandRoutes,
     ],
-  },
+  }
 ];
 
 export default routes;

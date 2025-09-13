@@ -1,10 +1,13 @@
 import AutomationBuilder from "@/pages/Automation/Providers/Instagram/AutomationBuilder";
+import AutomationList from "@/pages/Automation/Providers/Instagram/CommentAutomation";
 import { lazy } from "react";
 import { Outlet, RouteObject } from "react-router-dom";
 
 const Automation = lazy(() => import("@/pages/Automation"));
 const Instagram = lazy(() => import("@/pages/Automation/Providers/Instagram"));
-const CommentAutomationForm = lazy(() => import("@/pages/Automation/Providers/Instagram/CommentAutomationForm"));
+const CommentAutomationForm = lazy(
+  () => import("@/pages/Automation/Providers/Instagram/CommentAutomationForm")
+);
 
 const automationRoutes: RouteObject = {
   path: "automation",
@@ -18,14 +21,18 @@ const automationRoutes: RouteObject = {
       path: "instagram",
       element: <Instagram />,
     },
+    // {
+    //   path: "instagram/create/:mediaId",
+    //   element: <CommentAutomationForm />,
+    // },
     {
       path: "instagram/create/:mediaId",
-      element: <CommentAutomationForm />,
+      element: <AutomationList />,
     },
     {
-      path:"instagram/create/:mediaId/buildAutomation",
-      element:<AutomationBuilder/>
-    }
+      path: "instagram/create/:mediaId/buildAutomation/:automationId",
+      element: <AutomationBuilder />,
+    },
   ],
 };
 

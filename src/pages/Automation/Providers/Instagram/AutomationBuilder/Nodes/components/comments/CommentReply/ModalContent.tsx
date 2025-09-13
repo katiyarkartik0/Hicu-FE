@@ -1,9 +1,9 @@
-import { Node } from "@xyflow/react";
+import type { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 import { useState } from "react";
 
 interface ModalContentProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  setNodes: React.Dispatch<React.SetStateAction<Node[]>>;
+  setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
   id: string;
   prototypeResponse?: string;
 }
@@ -19,8 +19,8 @@ function ModalContent({
   );
 
   const handleSave = () => {
-    setNodes((nds: Node[]) =>
-      nds.map((node: Node) =>
+    setNodes((nds: IgReactFlowNode[]) =>
+      nds.map((node: IgReactFlowNode) =>
         node.id === id
           ? { ...node, data: { ...node.data, prototypeResponse } }
           : node

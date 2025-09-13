@@ -3,6 +3,7 @@ import { Handle, Position, NodeProps } from "@xyflow/react";
 import { MessageCircle } from "lucide-react";
 import Modal from "@/components/ui/Modal";
 import ModalContent from "./ModalContent";
+import { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 
 interface CommentReplyProps extends NodeProps {
   data: {
@@ -10,7 +11,7 @@ interface CommentReplyProps extends NodeProps {
     description: string;
     prototypeResponse?: string;
   };
-  setNodes: React.Dispatch<React.SetStateAction<any>>;
+  setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
 
 const CommentReply: React.FC<CommentReplyProps> = ({ data, id, setNodes }) => {

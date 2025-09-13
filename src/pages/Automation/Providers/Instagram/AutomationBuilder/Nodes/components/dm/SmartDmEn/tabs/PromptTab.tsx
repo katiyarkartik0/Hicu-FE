@@ -65,6 +65,11 @@ const PromptTab: React.FC<PromptTabProps> = ({
             Use <code className="bg-gray-100 px-1 rounded">{"{{leads}}"}</code>{" "}
             to access the user's personal info.
           </li>
+          <li>
+            Use <code className="bg-gray-100 px-1 rounded">{`{{conversationHistory}}`}</code>{" "}
+            to dynamically refer to the history of conversation in DMs with the
+            commenter.
+          </li>
         </ul>
       </div>
       <button

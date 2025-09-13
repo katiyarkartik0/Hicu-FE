@@ -3,6 +3,7 @@ import { Handle, Position, NodeProps } from "@xyflow/react";
 import { Brain, MessageCircle } from "lucide-react";
 import Modal from "@/components/ui/Modal"; // Replace with your modal component
 import ModalContent from "./ModalContent";
+import { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 
 interface SmartCommentReplyProps extends NodeProps {
   data: {
@@ -10,7 +11,7 @@ interface SmartCommentReplyProps extends NodeProps {
     description: string;
     aiPrompt?: string;
   };
-  setNodes: React.Dispatch<React.SetStateAction<any>>;
+  setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
 
 const SmartCommentReply: React.FC<SmartCommentReplyProps> = ({

@@ -1,6 +1,7 @@
 import React from "react";
 import { nodeDefinitions } from "./Nodes";
-import { XYPosition, Node } from "@xyflow/react";
+import { XYPosition } from "@xyflow/react";
+import type { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 
 type NodeType =
   | "trigger"
@@ -13,7 +14,7 @@ type NodeType =
   | "commentReplyManual";
 
 interface NodePaletteProps {
-  setNodes: React.Dispatch<React.SetStateAction<Node[]>>;
+  setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
 
 const nodes = nodeDefinitions;
@@ -38,13 +39,14 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ setNodes }) => {
         data: {
           label: def.label,
           description: def.description,
+          hasConditionalEdges: def.hasConditionalEdges,
         },
       },
     ]);
   };
 
   return (
-    <div className="w-64 bg-white shadow-lg rounded-2xl border flex flex-col max-h-[calc(80vh-40px)]">
+    <div className="w-64 bg-white shadow-lg rounded-2xl border flex flex-col max-h-[calc(90vh-40px)]">
       {/* Header stays fixed */}
       <h2 className="text-lg font-semibold text-gray-700 p-4 border-b">
         Node Palette

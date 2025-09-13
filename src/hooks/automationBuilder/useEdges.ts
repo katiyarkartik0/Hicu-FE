@@ -1,5 +1,5 @@
+import type{ IgReactFlowEdge } from "@/type/interfaces/igReactFlow";
 import {
-  Edge,
   Connection,
   EdgeChange,
   addEdge,
@@ -7,10 +7,10 @@ import {
 } from "@xyflow/react";
 import { useCallback, useState } from "react";
 
-const initialEdges: Edge[] = [];
+const initialEdges: IgReactFlowEdge[] = [];
 
 function useEdges() {
-  const [edges, setEdges] = useState<Edge[]>(initialEdges);
+  const [edges, setEdges] = useState<IgReactFlowEdge[]>(initialEdges);
   const onEdgesChange = useCallback(
     (changes: EdgeChange[]) =>
       setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
@@ -18,7 +18,7 @@ function useEdges() {
   );
 
   const onConnect = useCallback(
-    (params: Edge | Connection) =>
+    (params: IgReactFlowEdge | Connection) =>
       setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
     []
   );

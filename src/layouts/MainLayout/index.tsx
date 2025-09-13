@@ -7,7 +7,7 @@ function MainLayout() {
     <div className="flex h-screen">
       <Sidebar />
       <div className="flex-1 flex flex-col h-full overflow-hidden">
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="p-4 flex-1 overflow-auto">
           <Outlet />
         </div>

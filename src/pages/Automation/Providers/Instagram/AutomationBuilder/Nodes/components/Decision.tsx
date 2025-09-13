@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
-import { Handle, Position, NodeProps, Node } from "@xyflow/react";
+import { Handle, Position, NodeProps } from "@xyflow/react";
 import { Split } from "lucide-react"; // example icon, change if you want
+import type { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 
 interface DecisionProps extends NodeProps {
   data: {
@@ -8,7 +9,7 @@ interface DecisionProps extends NodeProps {
     description?: string;
   };
   style?: React.CSSProperties;
-  setNodes: React.Dispatch<React.SetStateAction<Node[]>>;
+  setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
 
 export default function Decision({ id, data, style, setNodes }: DecisionProps) {
@@ -54,7 +55,7 @@ export default function Decision({ id, data, style, setNodes }: DecisionProps) {
           .concat({
             id: newId,
             type: "default",
-            data: { label },
+            data: { label, description: "", hasConditionalEdges: false },
             parentId,
             extent: "parent",
             position: {

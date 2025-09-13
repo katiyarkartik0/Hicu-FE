@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { Handle, Position, NodeProps } from "@xyflow/react";
 import { Send } from "lucide-react";
+import Modal from "@/components/ui/Modal";
+import ModalContent from "./ModalContent";
+import type { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 
 interface DmProps extends NodeProps {
   data: {
     label: string;
     description: string;
+    prototypeResponse?: string;
   };
+  setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
 
-const Dm: React.FC<DmProps> = ({ data }) => {
+const Dm: React.FC<DmProps> = ({ data, setNodes, id }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
-    <div className="flex flex-col items-center p-3 rounded-xl border shadow-sm bg-gray-50 hover:bg-gray-100 transition text-center w-64">
+    <div
+      onClick={() => setIsModalOpen(true)}
+      className="flex flex-col items-center p-3 rounded-xl border shadow-sm bg-gray-50 hover:bg-gray-100 transition text-center w-64"
+    >
+      <Modal onClose={() => setIsModalOpen(false)} isOpen={isModalOpen}>
+        <ModalContent
+          setNodes={setNodes}
+          setIsModalOpen={setIsModalOpen}
+          id={id}
+        />
+      </Modal>
       {/* Top handle */}
+
       <Handle
         type="target"
         position={Position.Top}
