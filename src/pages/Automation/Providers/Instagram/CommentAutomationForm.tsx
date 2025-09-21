@@ -3,7 +3,7 @@ import { useNumericParam } from "@/hooks/react-router";
 import { automationService } from "@/services/automation";
 import { useMutation } from "@tanstack/react-query";
 import { useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 type AutomationItem = { id: number; url: string; available: boolean };
 
@@ -15,8 +15,8 @@ const availableCommentAutomation: AutomationItem[] = [
   },
   {
     id: 2,
-    url: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/LampFlowchart.svg/500px-LampFlowchart.svg.png",
-    available: false,
+    available: true,
+    url: "https://d2j6dbq0eux0bg.cloudfront.net/images/60034601/2262014222.jpg",
   },
   {
     id: 2,
@@ -65,6 +65,8 @@ export default function CommentAutomationForm() {
     });
   }
 
+  const navigate = useNavigate();
+
   return (
     <div className="p-6 space-y-10 max-w-6xl mx-auto">
       {/* Section 1: Comment Carousel */}
@@ -85,6 +87,7 @@ export default function CommentAutomationForm() {
             ref={carouselRef}
             className="flex overflow-x-auto space-x-4 scrollbar-hide scroll-smooth px-8"
           >
+            <button onClick={()=>navigate("./buildAutomation")}>Automation Builder</button>
             {availableCommentAutomation.map((item) => {
               const isSelected = selectedCommentAutomationId === item.id;
               const isDisabled = !item.available;
