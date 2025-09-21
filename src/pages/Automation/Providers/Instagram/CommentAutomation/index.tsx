@@ -56,6 +56,7 @@ export default function AutomationList() {
               <AutomationCard
                 key={a.id}
                 id={a.id}
+                isActive={a.isActive}
                 name={a.name || "Untitled"}
                 mediaId={a.mediaId}
                 createdAt={new Date(a.createdAt).toLocaleDateString()}

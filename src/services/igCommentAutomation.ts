@@ -67,4 +67,49 @@ export const igCommentAutomationService = {
 
     return result.data as IgCommentAutomation[];
   },
+  activateAutomation: async (automationId: number) => {
+    const ENDPOINT = `${API_BASE_URL}/igCommentAutomation/activate/${automationId}`;
+    const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+
+    const response = await fetch(ENDPOINT, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        result?.message ||
+          `Failed to activate automation (HTTP ${response.status})`
+      );
+    }
+
+    return result.data as IgCommentAutomation;
+  },
+
+  deactivateAutomation: async (automationId: number) => {
+    const ENDPOINT = `${API_BASE_URL}/igCommentAutomation/deactivate/${automationId}`;
+    const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+
+    const response = await fetch(ENDPOINT, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        result?.message ||
+          `Failed to deactivate automation (HTTP ${response.status})`
+      );
+    }
+
+    return result.data as IgCommentAutomation;
+  },
 };
