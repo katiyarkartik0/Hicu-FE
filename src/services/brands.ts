@@ -5,17 +5,9 @@ import type { BrandInfo } from "@/type/interfaces/brands";
 const brandService = {
   createBrand: async (
     brandInfo: Omit<BrandInfo, "id">
-  ): Promise<{
-    id: number;
-    name: string;
-    description?: string;
-    website?: string;
-    svgIcon?: string;
-    createdAt: Date;
-    updatedAt: Date;
-  }> => {
+  ): Promise<BrandInfo> => {
     const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-    const res = await fetch(`${API_BASE_URL}/accounts`, {
+    const response = await fetch(`${API_BASE_URL}/accounts`, {
       method: "POST",
       body: JSON.stringify(brandInfo),
       headers: {
@@ -24,47 +16,49 @@ const brandService = {
       },
     });
 
-    let data;
-    try {
-      data = await res.json();
-    } catch (e) {
-      console.log(e);
-      data = null;
+    if (!response.ok) {
+      throw new Error("Failed to add new brand");
     }
-    if (!res.ok || !data) {
-      throw new Error(data?.message || "Failed to add new brand");
-    }
-    return data;
+
+    const result = await response.json();
+    return result.data; // unwrap the { data } object from backend
   },
 
-  getAllBrands: async () => {
-    const res = await fetch(`${API_BASE_URL}/accounts`);
-    let data;
-    try {
-      data = await res.json();
-    } catch (e) {
-      console.log(e);
-      data = null;
-    }
-    if (!res.ok || !data)
-      throw new Error(data?.message || "Failed to fetch accounts");
-    return data;
-  },
-  getBrandById: async (id: number): Promise<any> => {
+  getAllBrands: async (): Promise<BrandInfo[]> => {
     const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-    const res = await fetch(`${API_BASE_URL}/accounts/${id}`, {
-      method: "GET",
+    const response = await fetch(`${API_BASE_URL}/accounts`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data?.message || "Failed to fetch account");
-    return data;
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch accounts");
+    }
+
+    const result = await response.json();
+    return result.data;
   },
-  updateBrand: async (id: number, payload: BrandInfo) => {
+
+  getBrandById: async (id: number): Promise<BrandInfo> => {
     const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
-    const res = await fetch(`${API_BASE_URL}/accounts/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/accounts/${id}`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch account");
+    }
+
+    const result = await response.json();
+    return result.data;
+  },
+
+  updateBrand: async (id: number, payload: BrandInfo): Promise<BrandInfo> => {
+    const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+    const response = await fetch(`${API_BASE_URL}/accounts/${id}`, {
       method: "PATCH",
       body: JSON.stringify(payload),
       headers: {
@@ -73,22 +67,30 @@ const brandService = {
       },
     });
 
-    const data = await res.json();
-    if (!res.ok) throw new Error(data?.message || "Failed to update account");
-    return data;
-  },
-  deleteBrand: async (id: number) => {
-    const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+    if (!response.ok) {
+      throw new Error("Failed to update account");
+    }
 
-    const res = await fetch(`${API_BASE_URL}/accounts/${id}`, {
+    const result = await response.json();
+    return result.data;
+  },
+
+  deleteBrand: async (id: number): Promise<BrandInfo> => {
+    const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
+    const response = await fetch(`${API_BASE_URL}/accounts/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
     });
-    if (!res.ok) throw new Error("Failed to delete account");
-    return true;
+
+    if (!response.ok) {
+      throw new Error("Failed to delete account");
+    }
+
+    const result = await response.json();
+    return result.data; // return the deleted brand object
   },
 };
 
