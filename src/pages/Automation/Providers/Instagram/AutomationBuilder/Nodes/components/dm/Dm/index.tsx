@@ -7,9 +7,11 @@ import type { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 
 interface DmProps extends NodeProps {
   data: {
-    label: string;
+    aiPrompt?: string;
     description: string;
+    hasConditionalEdges: boolean;
     prototypeResponse?: string;
+    label: string;
   };
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
@@ -27,6 +29,7 @@ const Dm: React.FC<DmProps> = ({ data, setNodes, id }) => {
           setNodes={setNodes}
           setIsModalOpen={setIsModalOpen}
           id={id}
+          data={data}
         />
       </Modal>
       {/* Top handle */}

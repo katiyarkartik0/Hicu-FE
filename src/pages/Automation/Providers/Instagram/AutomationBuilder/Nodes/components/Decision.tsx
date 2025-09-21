@@ -1,7 +1,5 @@
-import React, { useCallback, useState } from "react";
-import { Handle, Position, NodeProps } from "@xyflow/react";
-import { Split } from "lucide-react"; // example icon, change if you want
-import type { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
+import { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
+import { Handle, NodeProps, Position } from "@xyflow/react";
 
 interface DecisionProps extends NodeProps {
   data: {
@@ -12,107 +10,30 @@ interface DecisionProps extends NodeProps {
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
 
-export default function Decision({ id, data, style, setNodes }: DecisionProps) {
-  const [input, setInput] = useState("");
-
-  const handleAdd = () => {
-    if (!input.trim()) return;
-    handleAddChild(id, input.trim());
-    setInput("");
+export default function Decision({ id, data, style }: DecisionProps) {
+  // Default size (same as default node)
+  const mergedStyle: React.CSSProperties = {
+    width: 150,
+    height: 36,
+    ...style, // allow override from React Flow / DB
   };
-
-  const handleAddChild = useCallback(
-    (parentId: string, label: string) => {
-      setNodes((prev) => {
-        const newId = `child-${prev.length + 1}`;
-
-        // Count children of this parent
-        const childCount = prev.filter((n) => n.parentId === parentId).length;
-
-        const childSlot = 150;
-        const padding = 40;
-
-        return prev
-          .map((n) => {
-            if (n.id === parentId) {
-              const baseWidth =
-                typeof n.style?.width === "number" ? n.style.width : 400;
-
-              const newWidth = Math.max(
-                baseWidth,
-                (childCount + 1) * childSlot + padding
-              );
-              return {
-                ...n,
-                style: {
-                  ...n.style,
-                  width: newWidth,
-                },
-              };
-            }
-            return n;
-          })
-          .concat({
-            id: newId,
-            type: "default",
-            data: { label, description: "", hasConditionalEdges: false },
-            parentId,
-            extent: "parent",
-            position: {
-              x: 40 + childCount * childSlot,
-              y: 120,
-            },
-            style: {
-              width: childSlot - 20,
-              height: 50,
-            },
-          });
-      });
-    },
-    [id, setNodes]
-  );
 
   return (
     <div
-      style={style}
-      className="flex h-44 flex-col items-center p-3 rounded-xl border shadow-sm bg-gray-50 hover:bg-gray-100 transition text-center min-w-[16rem]"
+      style={mergedStyle}
+      className="bg-white shadow-md rounded-lg border border-gray-300 text-center relative flex flex-col justify-center"
     >
-      {/* Top handle */}
-      <Handle
-        type="target"
-        position={Position.Top}
-        className="w-3 h-3 bg-indigo-500"
-      />
-
-      {/* Icon */}
-      <div className="flex items-center justify-center gap-2 mb-2">
-        <Split className="w-6 h-6 text-indigo-500" />
-      </div>
-
       {/* Label */}
-      <span className="font-medium">{data.label || "Decision"}</span>
-
-      {/* Description / Input */}
-      <div className="mt-2 flex w-full gap-2">
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Condition..."
-          className="flex-1 px-2 py-1 rounded border text-sm"
-        />
-        <button
-          onClick={handleAdd}
-          className="bg-indigo-500 hover:bg-indigo-600 text-white px-2 py-1 rounded text-sm"
-        >
-          Add
-        </button>
+      <div className="px-2">
+        <span className="font-medium text-gray-800 text-sm">{data.label}</span>
       </div>
 
-      {/* Bottom handle */}
+      {/* Bottom Handle */}
       <Handle
         type="source"
         position={Position.Bottom}
-        className="w-3 h-3 bg-indigo-500"
+        id={`${id}-bottom`}
+        className="w-3 h-3 bg-green-500 border-2 border-white rounded-full"
       />
     </div>
   );

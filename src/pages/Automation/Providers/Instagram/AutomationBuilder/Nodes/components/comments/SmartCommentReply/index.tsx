@@ -10,6 +10,7 @@ interface SmartCommentReplyProps extends NodeProps {
     label: string;
     description: string;
     aiPrompt?: string;
+    hasConditionalEdges: boolean;
   };
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
@@ -28,6 +29,7 @@ const SmartCommentReply: React.FC<SmartCommentReplyProps> = ({
           setIsModalOpen={setIsModalOpen}
           setNodes={setNodes}
           id={id}
+          data={data}
         />
       </Modal>
 

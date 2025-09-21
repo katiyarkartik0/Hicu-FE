@@ -5,16 +5,22 @@ interface ModalContentProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
   id: string;
-  aiPrompt?: string;
+  data: {
+    aiPrompt?: string;
+    description: string;
+    hasConditionalEdges: boolean;
+    prototypeResponse?: string;
+    label: string;
+  };
 }
 
 function ModalContent({
   setIsModalOpen,
   setNodes,
   id,
-  aiPrompt: savedAiPrompt = "",
+  data,
 }: ModalContentProps) {
-  const [aiPrompt, setAiPrompt] = useState(savedAiPrompt);
+  const [aiPrompt, setAiPrompt] = useState(data.aiPrompt);
 
   const handleSave = () => {
     setNodes((nds: IgReactFlowNode[]) =>

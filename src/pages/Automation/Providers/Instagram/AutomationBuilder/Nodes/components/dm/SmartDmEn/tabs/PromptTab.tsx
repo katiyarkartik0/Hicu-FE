@@ -5,14 +5,22 @@ interface PromptTabProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
   id: string; // 👈 node id
+  data: {
+    aiPrompt?: string;
+    description: string;
+    hasConditionalEdges: boolean;
+    prototypeResponse?: string;
+    label: string;
+  };
 }
 
 const PromptTab: React.FC<PromptTabProps> = ({
   setIsModalOpen,
   setNodes,
   id,
+  data,
 }) => {
-  const [aiPrompt, setAiPrompt] = useState("");
+  const [aiPrompt, setAiPrompt] = useState(data.aiPrompt);
   const savePrompt = () => {
     setNodes((nds) =>
       nds.map((node) =>
@@ -66,7 +74,8 @@ const PromptTab: React.FC<PromptTabProps> = ({
             to access the user's personal info.
           </li>
           <li>
-            Use <code className="bg-gray-100 px-1 rounded">{`{{conversationHistory}}`}</code>{" "}
+            Use{" "}
+            <code className="bg-gray-100 px-1 rounded">{`{{conversationHistory}}`}</code>{" "}
             to dynamically refer to the history of conversation in DMs with the
             commenter.
           </li>

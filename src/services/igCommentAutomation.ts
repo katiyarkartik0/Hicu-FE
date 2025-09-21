@@ -46,7 +46,7 @@ export const igCommentAutomationService = {
   }: {
     mediaId: string;
   }): Promise<IgCommentAutomation[]> => {
-    const ENDPOINT = `${API_BASE_URL}/igCommentAutomation/media/${mediaId}`;
+    const ENDPOINT = `${API_BASE_URL}/igCommentAutomation/findAll/${mediaId}`;
     const accessToken = storage.get(LOCAL_STORAGE_KEY.ACCESS_TOKEN);
 
     const response = await fetch(ENDPOINT, {

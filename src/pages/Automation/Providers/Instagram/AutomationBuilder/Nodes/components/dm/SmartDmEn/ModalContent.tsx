@@ -8,12 +8,20 @@ interface ModalContentProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
   id: string; // 👈 add id
+  data: {
+    aiPrompt?: string;
+    description: string;
+    hasConditionalEdges: boolean;
+    prototypeResponse?: string;
+    label: string;
+  };
 }
 
 const ModalContent: React.FC<ModalContentProps> = ({
   setIsModalOpen,
   setNodes,
   id,
+  data,
 }) => {
   const [activeTab, setActiveTab] = useState<"vector" | "prompt">("vector");
 
@@ -24,6 +32,7 @@ const ModalContent: React.FC<ModalContentProps> = ({
         <VectorTab />
       ) : (
         <PromptTab
+          data={data}
           setIsModalOpen={setIsModalOpen}
           setNodes={setNodes}
           id={id}

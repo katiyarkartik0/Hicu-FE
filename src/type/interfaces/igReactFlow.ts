@@ -6,8 +6,14 @@ interface AdditionalIgReactFlowNodeInfo extends Record<string, unknown> {
   hasConditionalEdges: boolean;
   prototypeResponse?: string;
   aiPrompt?: string;
+  conditionalEdgesToNodes?: { condition: string; route: string }[];
 }
 
 export type IgReactFlowNode = Node<AdditionalIgReactFlowNodeInfo>;
 
-export type IgReactFlowEdge = Edge;
+export interface IgReactFlowEdge extends Edge {
+  sourceType: string;
+  targetType: string;
+}
+
+// export type IgReactFlowEdge = Edge;

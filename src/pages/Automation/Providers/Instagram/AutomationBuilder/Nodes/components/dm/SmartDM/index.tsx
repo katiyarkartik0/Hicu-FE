@@ -6,8 +6,11 @@ import ModalContent from "./ModalContent";
 
 interface SmartDmProps extends NodeProps {
   data: {
-    label: string;
+    aiPrompt?: string;
     description: string;
+    hasConditionalEdges: boolean;
+    prototypeResponse?: string;
+    label: string;
   };
   aiPrompt?: string;
   setNodes: React.Dispatch<React.SetStateAction<any>>;
@@ -23,7 +26,7 @@ const SmartDm: React.FC<SmartDmProps> = ({ data, setNodes, id, aiPrompt }) => {
           setIsModalOpen={setIsModalOpen}
           setNodes={setNodes}
           id={id}
-          aiPrompt={aiPrompt}
+          data={data}
         />
       </Modal>
       <div onClick={()=>setIsModalOpen(true)} className="flex flex-col items-center p-3 rounded-xl border shadow-sm bg-gray-50 hover:bg-gray-100 transition text-center w-64">

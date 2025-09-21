@@ -9,23 +9,29 @@ import {
 } from "lucide-react";
 import Trigger from "./components/Trigger";
 import End from "./components/End";
-import Decision from "./components/Decision";
+import Policy from "./components/Policy";
 import SmartCommentReplyEn from "./components/comments/SmartCommentReplyEn";
 import CommentReply from "./components/comments/CommentReply";
 import SmartCommentReply from "./components/comments/SmartCommentReply";
 import SmartDm from "./components/dm/SmartDM";
 import SmartDmReplyEn from "./components/dm/SmartDmEn";
 import Dm from "./components/dm/Dm";
+import Decision from "./components/Decision";
 
 export type NodeType =
-  | "trigger"
-  | "end"
-  | "decision"
-  | "dm"
-  | "commentReply"
+  | "__start__"
+  | "__end__"
+  | "route"
+  | "aiRouter"
+  // DM
+  | "dmAiVectorDb"
+  | "dmAi"
+  | "dmManual"
+  // Comments
   | "commentReplyAiVectorDb"
   | "commentReplyAi"
   | "commentReplyManual";
+
 
 const dmNodes = [
   {
@@ -83,7 +89,7 @@ const commentNodes = [
 
 export const nodeDefinitions = [
   {
-    type: "trigger" as NodeType,
+    type: "__start__" as NodeType,
     label: "__start__",
     icons: [Play],
     description: "Entry point of the flow (only one allowed).",
@@ -91,7 +97,7 @@ export const nodeDefinitions = [
     hasConditionalEdges: false,
   },
   {
-    type: "end" as NodeType,
+    type: "__end__" as NodeType,
     label: "__end__",
     icons: [PlusCircle],
     description: "Exit point of the flow (multiple allowed).",
@@ -99,10 +105,18 @@ export const nodeDefinitions = [
     hasConditionalEdges: false,
   },
   {
-    type: "decision" as NodeType,
-    label: "Decision",
+    type: "aiRouter" as NodeType,
+    label: "Router",
     icons: [Split],
     description: "Branch logic based on conditions.",
+    component: Policy,
+    hasConditionalEdges: true,
+  },
+  {
+    type: "route" as NodeType,
+    label: "Route",
+    icons: [],
+    description: "Specific Route",
     component: Decision,
     hasConditionalEdges: true,
   },

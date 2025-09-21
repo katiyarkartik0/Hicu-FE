@@ -1,4 +1,7 @@
-import type{ IgReactFlowEdge } from "@/type/interfaces/igReactFlow";
+import type {
+  IgReactFlowEdge,
+  IgReactFlowNode,
+} from "@/type/interfaces/igReactFlow";
 import {
   Connection,
   EdgeChange,
@@ -13,13 +16,27 @@ function useEdges() {
   const [edges, setEdges] = useState<IgReactFlowEdge[]>(initialEdges);
   const onEdgesChange = useCallback(
     (changes: EdgeChange[]) =>
-      setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
+      setEdges(
+        (edgesSnapshot) =>
+          applyEdgeChanges(changes, edgesSnapshot) as IgReactFlowEdge[]
+      ),
     []
   );
 
   const onConnect = useCallback(
-    (params: IgReactFlowEdge | Connection) =>
-      setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
+    (params: Connection, nodes: IgReactFlowNode[]) =>
+      setEdges((edgesSnapshot) => {
+        const sourceNodeType = nodes.find((n) => n.id === params.source)?.type;
+        const targetNodeType = nodes.find((n) => n.id === params.target)?.type;
+        const newEdge: IgReactFlowEdge = {
+          id: `${params.source}-${params.target}-${Date.now()}`, // unique id
+          ...params,
+          sourceType: sourceNodeType ?? "__unknown__",
+          targetType: targetNodeType ?? "__unknown__",
+        };
+
+        return addEdge(newEdge, edgesSnapshot);
+      }),
     []
   );
 

@@ -7,9 +7,11 @@ import { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 
 interface CommentReplyProps extends NodeProps {
   data: {
-    label: string;
+    aiPrompt?: string;
     description: string;
+    hasConditionalEdges: boolean;
     prototypeResponse?: string;
+    label: string;
   };
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
@@ -24,6 +26,7 @@ const CommentReply: React.FC<CommentReplyProps> = ({ data, id, setNodes }) => {
           setNodes={setNodes}
           setIsModalOpen={setIsModalOpen}
           id={id}
+          data={data}
         />
       </Modal>
 

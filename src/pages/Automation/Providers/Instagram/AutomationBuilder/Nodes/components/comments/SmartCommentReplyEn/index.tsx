@@ -8,8 +8,11 @@ import { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 // Node props with data
 interface SmartCommentReplyEnProps extends NodeProps {
   data: {
-    label: string;
+    aiPrompt?: string;
     description: string;
+    hasConditionalEdges: boolean;
+    prototypeResponse?: string;
+    label: string;
   };
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
@@ -28,6 +31,7 @@ const SmartCommentReplyEn: React.FC<SmartCommentReplyEnProps> = ({
           setIsModalOpen={setIsModalOpen}
           setNodes={setNodes}
           id={id} // 👈 pass node id
+          data={data}
         />
       </Modal>
 

@@ -1,50 +1,35 @@
 import React from "react";
 import { nodeDefinitions } from "./Nodes";
+import type { NodeType } from "./Nodes";
 import { XYPosition } from "@xyflow/react";
 import type { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 
-type NodeType =
-  | "trigger"
-  | "end"
-  | "decision"
-  | "dm"
-  | "commentReply"
-  | "commentReplyAiVectorDb"
-  | "commentReplyAi"
-  | "commentReplyManual";
+const generatePosition = (): XYPosition => ({
+  x: Math.random() * 400,
+  y: Math.random() * 400,
+});
+
+const createNode = (def: (typeof nodeDefinitions)[number], type: NodeType) => ({
+  id: `${type}-${Date.now()}`,
+  type,
+  position: generatePosition(),
+  data: {
+    label: def.label,
+    description: def.description,
+    hasConditionalEdges: def.hasConditionalEdges,
+  },
+});
 
 interface NodePaletteProps {
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
 }
 
-const nodes = nodeDefinitions;
-
 export const NodePalette: React.FC<NodePaletteProps> = ({ setNodes }) => {
   const handleAddNode = (type: NodeType) => {
     const def = nodeDefinitions.find((nd) => nd.type === type);
     if (!def) return;
-
-    const id = `${type}-${Date.now()}`; // safer unique id
-    const position: XYPosition = {
-      x: Math.random() * 400,
-      y: Math.random() * 400,
-    };
-
-    setNodes((prev) => [
-      ...prev,
-      {
-        id,
-        type,
-        position,
-        data: {
-          label: def.label,
-          description: def.description,
-          hasConditionalEdges: def.hasConditionalEdges,
-        },
-      },
-    ]);
+    setNodes((prev) => [...prev, createNode(def, type)]);
   };
-
   return (
     <div className="w-64 bg-white shadow-lg rounded-2xl border flex flex-col max-h-[calc(90vh-40px)]">
       {/* Header stays fixed */}
@@ -54,25 +39,25 @@ export const NodePalette: React.FC<NodePaletteProps> = ({ setNodes }) => {
 
       {/* Scrollable area */}
       <div className="overflow-y-auto p-4 space-y-3">
-        {nodes.map((node) => {
+        {nodeDefinitions.map((def) => {
           return (
             <button
-              key={node.type}
-              onClick={() => handleAddNode(node.type)}
+              key={def.type}
+              onClick={() => handleAddNode(def.type)}
               className={`flex flex-col items-center p-3 rounded-xl border shadow-sm transition text-center w-full bg-gray-50 hover:bg-gray-100 cursor-pointer`}
             >
               {/* Icons horizontally aligned */}
               <div className="flex items-center justify-center gap-2 mb-2">
-                {node.icons.map((Icon, i) => (
+                {def.icons.map((Icon, i) => (
                   <Icon key={i} className="w-6 h-6 text-indigo-500" />
                 ))}
               </div>
 
               {/* Label */}
-              <span className="font-medium">{node.label}</span>
+              <span className="font-medium">{def.label}</span>
 
               {/* Description */}
-              <p className="text-xs text-gray-500 mt-1">{node.description}</p>
+              <p className="text-xs text-gray-500 mt-1">{def.description}</p>
 
               <span className="mt-2 text-xs text-gray-500">+ Add</span>
             </button>

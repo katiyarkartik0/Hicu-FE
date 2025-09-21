@@ -41,18 +41,21 @@ export const igReactFlowService = {
         x: n.positionX,
         y: n.positionY,
       },
-      measured: {
-        width: n.width,
-        height: n.height,
+      style: {
+        width: n.width ?? undefined,
+        height: n.height ?? undefined,
       },
       dragging: n.dragging,
       selected: n.selected,
+      extent: n.extent,
+      parentId: n.parentId,
       data: {
         label: n.data?.label,
         description: n.data?.description,
         prototypeResponse: n.data?.prototypeResponse,
         aiPrompt: n.data?.aiPrompt,
         hasConditionalEdges: n.data?.hasConditionalEdges,
+        conditionalEdgesToNodes: n.data.conditionalEdgesToNodes ?? [],
       },
     }));
   },
@@ -77,22 +80,24 @@ export const igReactFlowService = {
       type: n.type,
       positionX: n.position.x,
       positionY: n.position.y,
-      width: n.measured?.width ?? DEFAULT_NODE_WIDTH,
-      height: n.measured?.height ?? DEFAULT_NODE_HEIGHT,
+      width: n.style?.width,
+      height: n.style?.height,
       dragging: n.dragging ?? false,
       selected: n.selected ?? false,
+      extent: n.extent,
+      parentId: n.parentId,
       data: {
         label: n.data.label,
         description: n.data.description,
         prototypeResponse: n.data.prototypeResponse ?? null,
         aiPrompt: n.data.aiPrompt ?? null,
         hasConditionalEdges: n.data.hasConditionalEdges ?? false,
+        conditionalEdgesToNodes: n.data.conditionalEdgesToNodes ?? [],
       },
       accountId,
       mediaId,
       automationId,
     }));
-
     const body = JSON.stringify({ brandId, data: prismaNodes });
 
     const res = await fetch(ENDPOINT, {
@@ -115,18 +120,21 @@ export const igReactFlowService = {
         x: n.positionX,
         y: n.positionY,
       },
-      measured: {
-        width: n.width,
-        height: n.height,
+      style: {
+        width: n.width ?? undefined,
+        height: n.height ?? undefined,
       },
       dragging: n.dragging,
       selected: n.selected,
+      extent: n.extent,
+      parentId: n.parentId,
       data: {
         label: n.data?.label,
         description: n.data?.description,
         prototypeResponse: n.data?.prototypeResponse,
         aiPrompt: n.data?.aiPrompt,
         hasConditionalEdges: n.data?.hasConditionalEdges,
+        conditionalEdgesToNodes: n.data?.conditionalEdgesToNodes,
       },
     }));
   },
@@ -157,6 +165,8 @@ export const igReactFlowService = {
       id: e.edgeId,
       source: e.sourceId,
       target: e.targetId,
+      sourceType:e.sourceType,
+      targetType:e.targetType
     })) as IgReactFlowEdge[];
   },
 
@@ -168,7 +178,7 @@ export const igReactFlowService = {
   }: {
     automationId: number;
     brandId: number;
-    edges: Edge[];
+    edges: IgReactFlowEdge[];
     mediaId: string;
   }) => {
     const ENDPOINT = `${API_BASE_URL}/igReactFlow/edges/upsert`;
@@ -184,6 +194,8 @@ export const igReactFlowService = {
       accountId,
       mediaId,
       automationId,
+      sourceType:e.sourceType,
+      targetType:e.targetType
     }));
 
     const body = JSON.stringify({ brandId, data: prismaEdges });
@@ -206,6 +218,8 @@ export const igReactFlowService = {
       id: e.edgeId,
       source: e.sourceId,
       target: e.targetId,
+      sourceType:e.sourceType,
+      targetType:e.targetType
     })) as IgReactFlowEdge[];
   },
   deleteNode: async (nodeId: string) => {

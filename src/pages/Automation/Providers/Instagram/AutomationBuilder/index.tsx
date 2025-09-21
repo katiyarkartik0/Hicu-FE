@@ -53,6 +53,8 @@ export default function AutomationBuilder() {
 
   if (!brandId || !mediaId || !automationId) return null;
 
+  console.log(edges, "check");
+
   const { data: savedNodes } = useQuery({
     queryFn: () => igReactFlowService.fetchNodes({ automationId }),
     queryKey: ["igReactFlowNodes", brandId, mediaId],
@@ -70,7 +72,7 @@ export default function AutomationBuilder() {
       setEdges(savedEdges);
     }
   }, [savedNodes, savedEdges]);
-  
+
   const nodeTypes: NodeTypes = useMemo(
     () => constructNodeTypes({ setNodes }),
     [setNodes]
@@ -104,7 +106,7 @@ export default function AutomationBuilder() {
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
           nodeTypes={nodeTypes}
-          onConnect={onConnect}
+          onConnect={(params) => onConnect(params, nodes)}
           fitView
         >
           <Background />

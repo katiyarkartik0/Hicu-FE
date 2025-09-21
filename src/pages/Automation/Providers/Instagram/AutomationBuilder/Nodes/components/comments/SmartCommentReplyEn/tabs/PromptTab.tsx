@@ -5,14 +5,22 @@ interface PromptTabProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setNodes: React.Dispatch<React.SetStateAction<IgReactFlowNode[]>>;
   id: string; // 👈 node id
+  data: {
+    aiPrompt?: string;
+    description: string;
+    hasConditionalEdges: boolean;
+    prototypeResponse?: string;
+    label: string;
+  };
 }
 
 const PromptTab: React.FC<PromptTabProps> = ({
   setIsModalOpen,
   setNodes,
   id,
+  data,
 }) => {
-  const [aiPrompt, setAiPrompt] = useState("");
+  const [aiPrompt, setAiPrompt] = useState(data.aiPrompt);
   const savePrompt = () => {
     setNodes((nds) =>
       nds.map((node) =>
@@ -21,13 +29,12 @@ const PromptTab: React.FC<PromptTabProps> = ({
               ...node,
               data: {
                 ...node.data,
-                aiPrompt, // 👈 embed aiPrompt in node's data
+                aiPrompt, 
               },
             }
           : node
       )
     );
-    console.log("AI Prompt Saved:", aiPrompt);
     setIsModalOpen(false);
   };
 
