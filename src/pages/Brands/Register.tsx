@@ -46,12 +46,24 @@ const useBrand = function () {
   });
 };
 
-const defaultBrandInfo: Omit<BrandInfo, "id"> = {
+export const defaultBrandInfo: Omit<BrandInfo, "id"> = {
   name: "",
-  svgIcon: "",
-  website: "",
   description: "",
+  website: "",
+  svgIcon: "",
+  createdAt: new Date(0),           // default placeholder date
+  updatedAt: new Date(0),
+  igUserId: "",
+  igUsername: "",
+  igFollowersCount: 0,
+  igFollowingCount: 0,
+  igMediaCount: 0,
+  igName: "",
+  igBiography: "",
+  igProfilePictureUrl: "",
+  igAccountType: "",
 };
+
 
 export default function RegisterBrand() {
   const [brandInfo, setBrandInfo] =

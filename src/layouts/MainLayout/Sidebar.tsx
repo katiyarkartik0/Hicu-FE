@@ -45,7 +45,7 @@ function Sidebar() {
 
   const defaultBrand = brands?.data?.find((b: BrandInfo) => b.id === brandId);
 
-  const getIcon = (svg?: string) =>
+  const getIcon = (svg: string | null) =>
     svg ? (
       <div dangerouslySetInnerHTML={{ __html: svg }} />
     ) : (
