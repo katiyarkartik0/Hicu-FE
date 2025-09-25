@@ -7,16 +7,17 @@ import {
   Brain,
   MessageCircle,
 } from "lucide-react";
-import Trigger from "./components/Trigger";
-import End from "./components/End";
-import Policy from "./components/Policy";
-import SmartCommentReplyEn from "./components/comments/SmartCommentReplyEn";
-import CommentReply from "./components/comments/CommentReply";
-import SmartCommentReply from "./components/comments/SmartCommentReply";
-import SmartDm from "./components/dm/SmartDM";
-import SmartDmReplyEn from "./components/dm/SmartDmEn";
-import Dm from "./components/dm/Dm";
-import Decision from "./components/Decision";
+
+import Trigger from "@/components/automation/igComment/Trigger";
+import End from "@/components/automation/igComment/End";
+import Policy from "@/components/automation/igComment/Policy";
+import Decision from "@/components/automation/igComment/Decision";
+import SmartDmReplyEn from "@/components/automation/igComment/dm/SmartDmEn";
+import SmartDm from "@/components/automation/igComment/dm/SmartDM";
+import Dm from "@/components/automation/igComment/dm/Dm";
+import SmartCommentReplyEn from "@/components/automation/igComment/comments/SmartCommentReplyEn";
+import SmartCommentReply from "@/components/automation/igComment/comments/SmartCommentReply";
+import CommentReply from "@/components/automation/igComment/comments/CommentReply";
 
 export type NodeType =
   | "__start__"
