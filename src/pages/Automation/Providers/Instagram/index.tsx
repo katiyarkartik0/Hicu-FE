@@ -2,7 +2,8 @@ import { useState } from "react";
 import Page from "./Page";
 import Button from "@/components/ui/Button";
 import Leads from "./Leads/Leads";
-import DmAutomationForm from "./DmAutomationForm";
+// import DmAutomationForm from "./DmAutomationForm";
+import AutomationList from "./DmAutomation";
 
 const TABS = [
   {
@@ -13,13 +14,13 @@ const TABS = [
   {
     key: "dmAutomation",
     label: "DM Automation",
-    component: DmAutomationForm,
+    component: AutomationList,
   },
-  {
-    key: "leads",
-    label: "Leads Generation",
-    component: Leads,
-  },
+  // {
+  //   key: "leads",
+  //   label: "Leads Generation",
+  //   component: Leads,
+  // },
   // Add more tiles here easily in future
 ];
 

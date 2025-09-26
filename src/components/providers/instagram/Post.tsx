@@ -15,7 +15,7 @@ const Post = ({
     <div
       key={post.id}
       className="aspect-square overflow-hidden relative cursor-pointer"
-      onClick={() => navigate(`create/${post.id}`)}
+      onClick={() => navigate(`comment/create/${post.id}`)}
     >
       {isAutomationRunning && (
         <div className="absolute top-2 right-2 z-10 bg-white/80 backdrop-blur-sm rounded-full p-1 shadow-md">
