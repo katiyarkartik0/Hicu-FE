@@ -7,7 +7,7 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import { NodePalette } from "./NodePalette";
-import { nodeDefinitions } from "./Nodes";
+import { nodeDefinitions } from "./nodes";
 import useNodes from "@/hooks/automationBuilder/useNodes";
 import useEdges from "@/hooks/automationBuilder/useEdges";
 import { useEffect, useMemo } from "react";

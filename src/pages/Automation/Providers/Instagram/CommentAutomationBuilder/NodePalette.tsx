@@ -1,6 +1,6 @@
 import React from "react";
-import { nodeDefinitions } from "./Nodes";
-import type { NodeType } from "./Nodes";
+import { nodeDefinitions } from "./nodes";
+import type { NodeType } from "./nodes";
 import { XYPosition } from "@xyflow/react";
 import type { IgReactFlowNode } from "@/type/interfaces/igReactFlow";
 

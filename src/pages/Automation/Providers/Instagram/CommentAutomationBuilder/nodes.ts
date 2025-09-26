@@ -8,16 +8,16 @@ import {
   MessageCircle,
 } from "lucide-react";
 
-import Trigger from "@/components/automation/igComment/Trigger";
-import End from "@/components/automation/igComment/End";
-import Policy from "@/components/automation/igComment/Policy";
-import Decision from "@/components/automation/igComment/Decision";
-import SmartDmReplyEn from "@/components/automation/igComment/dm/SmartDmEn";
-import SmartDm from "@/components/automation/igComment/dm/SmartDM";
-import Dm from "@/components/automation/igComment/dm/Dm";
-import SmartCommentReplyEn from "@/components/automation/igComment/comments/SmartCommentReplyEn";
-import SmartCommentReply from "@/components/automation/igComment/comments/SmartCommentReply";
-import CommentReply from "@/components/automation/igComment/comments/CommentReply";
+import Trigger from "@/components/automation/igCommentReactFlowNodes/Trigger";
+import End from "@/components/automation/igCommentReactFlowNodes/End";
+import Policy from "@/components/automation/igCommentReactFlowNodes/Policy";
+import Decision from "@/components/automation/igCommentReactFlowNodes/Decision";
+import SmartDmReplyEn from "@/components/automation/igCommentReactFlowNodes/dm/SmartDmEn";
+import SmartDm from "@/components/automation/igCommentReactFlowNodes/dm/SmartDM";
+import Dm from "@/components/automation/igCommentReactFlowNodes/dm/Dm";
+import SmartCommentReplyEn from "@/components/automation/igCommentReactFlowNodes/comments/SmartCommentReplyEn";
+import SmartCommentReply from "@/components/automation/igCommentReactFlowNodes/comments/SmartCommentReply";
+import CommentReply from "@/components/automation/igCommentReactFlowNodes/comments/CommentReply";
 
 export type NodeType =
   | "__start__"
