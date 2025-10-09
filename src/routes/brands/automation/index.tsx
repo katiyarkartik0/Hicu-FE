@@ -23,7 +23,7 @@ const automationRoutes: RouteObject = {
       element: <AutomationList />,
     },
     {
-      path: "instagram/create/:mediaId/buildAutomation/:automationId",
+      path: "instagram/comment/create/:mediaId/buildAutomation/:automationId",
       element: <AutomationBuilder />,
     },
   ],
