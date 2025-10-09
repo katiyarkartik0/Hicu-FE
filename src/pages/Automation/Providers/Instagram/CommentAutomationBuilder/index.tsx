@@ -57,12 +57,12 @@ export default function AutomationBuilder() {
 
   const { data: savedNodes } = useQuery({
     queryFn: () => igReactFlowService.fetchNodes({ automationId }),
-    queryKey: ["igReactFlowNodes", brandId, mediaId],
+    queryKey: ["igReactFlowNodes", automationId],
   });
 
   const { data: savedEdges } = useQuery({
     queryFn: () => igReactFlowService.fetchEdges({ automationId }),
-    queryKey: ["igReactFlowEdges", brandId, mediaId],
+    queryKey: ["igReactFlowEdges", automationId],
   });
   useEffect(() => {
     if (savedNodes) {
