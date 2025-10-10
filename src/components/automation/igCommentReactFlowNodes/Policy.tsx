@@ -25,7 +25,7 @@ export default function Policy({ id, data, style, setNodes }: DecisionProps) {
   const handleAddChild = useCallback(
     (parentId: string, label: string) => {
       setNodes((prev) => {
-        const newId = `child-${prev.length + 1}`;
+        const newId = `child-${prev.length + 1}-${Date.now()}`;
 
         // Count children of this parent
         const childCount = prev.filter((n) => n.parentId === parentId).length;
